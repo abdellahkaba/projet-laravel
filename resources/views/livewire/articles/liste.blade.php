@@ -1,5 +1,3 @@
-<h2>La liste des article </h2>
-
 <div class="row p-4 pt-5">
     <div class="col-12">
         <div class="card">
@@ -57,7 +55,11 @@
                     <tbody>
                         @forelse ($articles as $article)
                             <tr>
-                                <td><img src="{{ asset('images/imagePlaceholder.png') }}" alt="" width="60px" height="60px"></td>
+                                <td>
+                                    @if($article->imageUrl != "" || $article->imageUrl != null)
+                                        <img src="{{ asset($article->imageUrl) }}" alt="" style="width: 60px ; height: 60px;">
+                                    @endif
+                                </td>
                                 <td class="text-center">{{ $article->nom }} - {{ $article->noSerie }}</td>
                                 <td class="text-center">{{ $article->type->nom }}</td>
                                 <td class="text-center">
@@ -67,10 +69,11 @@
                                         <span class="badge badge-danger">Indisponible</span>
                                     @endif
                                 </td>
+
                                 <td class="text-center">{{ optional($article->created_at)->diffForHumans() }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-link" wire:click="editArticle('{{ $article->id }}')"><i class="far fa-edit"></i></button>
-                                    <button class="btn btn-link" wire:click="confirmDelete('{{ $article->id }}')"><i class='far fa-trash-alt'><i></button>
+                                    <button class="btn btn-success" wire:click="editArticle('{{ $article->id }}')">Modifier <i class="far fa-edit"></i></button>
+                                    <button class="btn btn-danger" wire:click="confirmDelete('{{ $article->id }}')">Delete <i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         @empty

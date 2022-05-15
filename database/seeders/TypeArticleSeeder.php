@@ -25,9 +25,22 @@ class TypeArticleSeeder extends Seeder
             ["nom" => "Engins"],
             ["nom" => "Chaises"],
             ["nom" => "Documents"],
-            ["nom" => "Femmes"],
-            ["nom" => "Hommes"],
-            
+
+
+        ]);
+
+        DB::table("propriete_articles")->insert([
+            ["nom" => "Marque" , "type_article_id" => 1],
+            ["nom" => "Prix" , "type_article_id" => 3],
+            ["nom" => "Couleur" , "type_article_id" => 5],
+            ["nom" => "Prix" , "type_article_id" => 1],
+            ["nom" => "Kilometrage" , "type_article_id" => 1],
+            ["nom" => "Marque" , "type_article_id" => 3],
+            ["nom" => "Dimession" , "type_article_id" => 2],
+            ["nom" => "Qualite" , "type_article_id" => 2],
+            ["nom" => "Reference" , "type_article_id" => 4],
+            ["nom" => "Vitesse" , "type_article_id" => 1],
+            ["nom" => "Couleur" , "type_article_id" => 8]
         ]);
     }
 }

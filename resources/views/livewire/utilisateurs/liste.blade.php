@@ -2,13 +2,15 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header bg-gradient-primary">
-                <h3 class="card-title"> <i class="fas fa-users fa-2x"></i> Liste des Utilisateurs</h3>
+                <h1 class="card-title"> <i class="fas fa-users fa-2x"></i> Liste des Utilisateurs</h1>
 
                 <div class="card-tools align-items-center d-flex">
-                    <a href="" class="btn btn-link text-white mr-4 d-block" wire:click.prevent="gotoaddUser()">
-                        <i class="fas fa-user-plus"></i>
-                        Nouvel Utilisateur
-                    </a>
+                    <h1>
+                        <a href="" class="btn btn-link text-white mr-4 d-block" wire:click.prevent="gotoaddUser()">
+                            <i class="fas fa-user-plus"></i>
+                            Nouvel Utilisateur
+                        </a>
+                    </h1>
                     <div class="input-group input-group-sm" style="width: 150px;">
                         <input type="text" name="table_search" class="form-control float-right" wire:model.debounce.100ms="search" placeholder="Search">
                         <div class="input-group-append" wire:model.debounce.100ms="search">
@@ -46,9 +48,9 @@
                             <td class="text-center"><span class="tag tag-success">
                                 {{ $user->created_at->diffForHumans() }}</span></td>
                             <td class="text-center">
-                                <button class="btn btn-link" wire:click="gotoEditUser('{{ $user->id }}')"><i class="far fa-edit"></i></button>
+                                <button class="btn btn-success" wire:click="gotoEditUser('{{ $user->id }}')">Edit <i class="far fa-edit"></i></button>
                                 @if (count($user->roles) == 0)
-                                    <button class="btn btn-link" wire:click="confirmDelete('{{ $user->id }}')"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-danger" wire:click="confirmDelete('{{ $user->id }}')">Delete <i class="far fa-trash-alt"></i></button>
                                 @endif
 
                             </td>

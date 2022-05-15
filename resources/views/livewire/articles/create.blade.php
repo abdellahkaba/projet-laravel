@@ -56,10 +56,14 @@
                         </div>
                         <div class="p-4">
                             <div class="form-group">
-                                <input type="file" name="" id="">
+                                <input type="file" name="" wire:model="addPhoto">
                             </div>
 
-                            <div class="" style="border-block: 1px solid #eee ; border-radius : 30px ; height:75%; "></div>
+                            <div class="" style="border-block: 1px solid #eee ; border-radius : 30px ; height:72%; width: 72% ; overflow: hidden;">
+                                @if ($addPhoto)
+                                    <img src="{{ $addPhoto->temporaryUrl() }}" style="height: 200px ; width: 250px;">
+                                @endif
+                            </div>
 
                         </div>
                     </div>

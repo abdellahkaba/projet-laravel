@@ -103,6 +103,35 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item {{ setMenuOpenClass('admin.gestmateriels.' , 'menu-open') }}" >
+                    <a href="#" class="nav-link {{ setMenuOpenClass('admin.gestmateriels.' , 'active') }}">
+                        <i class="nav-icon far fa-circle "></i>
+                        <p>
+                            Matériels Agricoles
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.gestmateriels.categories') }}" class="nav-link {{ setMenuActive('admin.habilitation.categories') }}">
+                                <i class="nav-icon fas fa-list-ul"></i>
+                                <p>Les catégories</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.gestmateriels.materiels') }}" class="nav-link {{ setMenuActive('admin.habilitation.materiels') }} ">
+                                <i class="nav-icon fas fa-list-ul"></i>
+                                <p>Matériels</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-sliders-h"></i>
+                                <p>Vente</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 @endcan
 
                 <li class="nav-header">Locations</li>

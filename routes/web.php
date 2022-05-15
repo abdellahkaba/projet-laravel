@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\ArticleLive;
+use App\Http\Livewire\CategorieLive;
+use App\Http\Livewire\MaterielLive;
 use App\Http\Livewire\TypeArticleLive;
 use App\Http\Livewire\Utilisateurs;
 
@@ -45,6 +47,14 @@ Route::group([
         //Mapper la route à un composant livewire et accession par une route
         Route::get("/types",TypeArticleLive::class)->name("types");
         Route::get("/articles",ArticleLive::class)->name("articles");
+    });
+    Route::group([
+        "prefix" =>"gestmateriels",
+        "as" =>"gestmateriels."
+    ], function(){
+        //Mapper la route à un composant liveWire Materiels
+        Route::get("/categories",CategorieLive::class)->name("categories");
+        Route::get("/materiels",MaterielLive::class)->name("materiels");
     });
 });
 // Route::get('/habilitations/utilisateurs', [UserController::class,'index'])->name('utilisateurs');

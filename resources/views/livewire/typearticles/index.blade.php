@@ -59,12 +59,12 @@
                                     <td>{{ $typearticle->nom }}</td>
                                     <td class="text-center">{{ optional($typearticle->created_at)->diffForHumans() }}</td>
                                     <td class="text-center">
-                                        <button class="btn btn-link" wire:click="editTypeArticle('{{ $typearticle->id }}')"><i class="far fa-edit"></i>
+                                        <button class="btn btn-success" wire:click="editTypeArticle('{{ $typearticle->id }}')">Edit <i class="far fa-edit"></i>
                                         </button>
-                                        <button  class="btn btn-link" wire:click="gotoPropriete('{{ $typearticle->id }}')"><i class="fa fa-list">Proprietés</i>
+                                        <button  class="btn btn-info" wire:click="gotoPropriete('{{ $typearticle->id }}')"><i class="fa fa-list">Proprietés</i>
                                         </button>
                                         @if (count($typearticle->articles) == 0)
-                                        <button class="btn btn-link" wire:click="confirmDelete('{{ $typearticle->id }}')"><i class='far fa-trash-alt'><i></button>
+                                        <button class="btn btn-danger" wire:click="confirmDelete('{{ $typearticle->id }}')">Delete <i class="far fa-trash-alt"></i></button>
                                         @endif
 
 

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\ProprieteArticle;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ArticlePropriete extends Model
 {
@@ -14,4 +15,8 @@ class ArticlePropriete extends Model
         "propriete_article_id",
         "article_id" , "valeur"
     ];
+
+    public function propriete(){
+        return $this->hasOne(ProprieteArticle::class , 'id' , 'propriete_article_id') ;
+    }
 }

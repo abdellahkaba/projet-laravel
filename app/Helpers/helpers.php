@@ -2,18 +2,30 @@
 
 use Illuminate\Support\Str;
 
-
+    //les constantes pour Utilisateur
     define("PAGECREATEFORM","create");
     define("PAGEEDITFORM","edit");
     define("PAGELISTE","liste");
     define("DEFAULTPASSWORD","password") ;
 
+    //Les constantes pour ProprietesArticles
     define("PROPRIETEINDEX" , "index");
     define("PROPRIETEPAGE","propriete");
     
+    //Les Constantes pour Article
     define("ARTICLECREATE","create");
     define("ARTICLEEDIT","edit") ;
     define("ARTICLELISTE","liste");
+
+    //Les Constantes pour Catégorie Matériels
+    define("CATEGORIECREATE","create");
+    define("CATEGORIELISTE","liste");
+
+    //Les Constantes pour Matériels
+    define("MATERIELLISTE","liste");
+    define("MATERIELCREATE","create");
+    define("MATERIELEDIT","edit");
+
 
     function UserName(){
         return auth()->user()->nom . ' ' . auth()->user()->prenom;

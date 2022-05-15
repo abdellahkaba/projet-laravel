@@ -5,11 +5,13 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Client;
 use App\Models\Article;
+use App\Models\Materiel;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RoleTableSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\TypeArticleSeeder;
 use Database\Seeders\DureeLocationSeeder;
+use Database\Seeders\CategorieTableSeeder;
 use Database\Seeders\StatutLocationSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -30,6 +32,8 @@ class DatabaseSeeder extends Seeder
          $this->call(DureeLocationSeeder::class);
          Article::factory(11)->create();
          Client::factory(10)->create();
+         $this->call(CategorieTableSeeder::class);
+         Materiel::factory(15)->create();
 
         // Article::find(1)->type_articles()->attach(1);
         // Article::find(2)->type_articles()->attach(2);

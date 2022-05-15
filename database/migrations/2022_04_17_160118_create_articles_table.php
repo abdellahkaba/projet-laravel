@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->string('noSerie');
+            $table->string('nom')->unique();
+            $table->string('noSerie')->unique();
             $table->string('imageUrl')->nullable();
-            $table->boolean('estDisponible');
+            $table->boolean('estDisponible')->default(1);
             $table->foreignId('type_article_id')->constrained("type_articles");
             $table->timestamps();
         });
