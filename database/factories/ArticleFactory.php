@@ -22,7 +22,6 @@ class ArticleFactory extends Factory
             "imageUrl" => "images/imageplaceholder.png",
             "type_article_id" => rand(1,4),
             "estDisponible" => rand(0,1) ,
-
         ];
     }
 }

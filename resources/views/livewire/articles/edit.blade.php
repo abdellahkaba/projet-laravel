@@ -4,7 +4,7 @@
             <div class="card-header">
                 <h3 class="card-title"> <i class="fas fa-user-plus fa-2x"></i> Edition d'un Article</h3>
             </div>
-            <form role="form" wire:submit.prevent="addArticle()">
+            <form role="form" wire:submit.prevent="updateArticle">
                 <div class="card-body">
                     @if($errors->any())
                             <div class="alert alert-danger">
@@ -63,7 +63,7 @@
                                 @endif
 
                                 @isset($editPhoto)
-                                 <button class="btn btn-default btn-sm mt-2" wire:click="$set('editPhoto', null)">Reinitialiser</button>
+                                 <button type="button" class="btn btn-default btn-sm mt-2" wire:click="$set('editPhoto', null)">Reinitialiser</button>
                                 @endisset
                             </div>
 

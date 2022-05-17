@@ -25,7 +25,7 @@ class ArticleLive extends Component
     public $addArticle = [] ; //
     public $proprieteArticles = null ;// une fonction qui prend les proprietés article
     public $addPhoto = null ;
-    public $editPhoto ;
+    public $editPhoto = null;
     public $editArticle = [] ; //fonction d'edition d'article
     public $editChanged = false ;
     public $editArticleValue = [] ;
@@ -33,14 +33,14 @@ class ArticleLive extends Component
     public $ArticlePage = ARTICLELISTE;
 
     //Validation definie pour l'edition de l'article
-    public function rules(){
-    
+    protected function rules(){
+
             return [
                 'editArticle.nom' => ['required' , Rule::unique("articles,nom")->ignore($this->editArticle['id'])],
                 'editArticle.noSerie' => ['required' , Rule::unique("articles,noSerie")->ignore($this->editArticle['id'])],
                 'editArticle.type_article_id' => 'required|exists:App\Models\TypeArticle,id',
                 'editArticle.article_proprietes.*.valeur' => 'required'
-    
+
             ] ;
     }
 
@@ -97,9 +97,7 @@ class ArticleLive extends Component
     // Ajout d'un article
     public function addArticle(){
 
-        if($this->ArticlePage == PAGEEDITFORM){
 
-        }
         $validateArr = [
             "addArticle.nom" => "string|min:3|required|unique:articles,nom",
             "addArticle.noSerie" => "string|max:50|min:3|required|unique:articles,noSerie",
@@ -231,45 +229,50 @@ class ArticleLive extends Component
     }
 
     //funciton de Modification
-    public function updateArticle(){
-       $this->validate() ;
+    public function updateArticle()
+    {
+
+
         //Recuperer l'article à editer
+        // $this->validate() ;
         $article = Article::find($this->editArticle["id"]) ;
 
         //Mettre toutes ces variables dans un tableau
+
         $article->fill($this->editArticle) ;
 
-
         //Modification de l'image
-        if($this->addPhoto != null){
-            $path = $this->addPhoto->store('upload', 'public');
-  
+        if($this->editPhoto != null){
+            $path = $this->editPhoto->store('upload', 'public');
+
             $imagePath = "storage/".$path ;
             //Redimensionner une image
             $image = Image::make(public_path($imagePath))->fit(204,204) ;
-            
-            $image->save() ;
+
+            dump($image->save()) ;
 
             //suppression de l'ancienne image par la nouvelle
             Storage::disk("local")->delete(str_replace("storage/","public" , $article->imageUrl()));
 
             $article->imageUrl = $imagePath ;
         }
-      
+
         $article->save() ;
 
         //Recuperer la proprieté article et mettre à jour sa valeur
 
         collect($this->editArticle["article_proprietes"])->
         each(
-            fn($item) => ArticlePropriete::where(  
+            fn($item) => ArticlePropriete::where(
             [
                 "article_id" => $item["article_id"] ,
-                "propriete_article_id" => $item["propriete_article_id"] 
-            ])->update(["valeur" => $item["valeur"]]) 
+                "propriete_article_id" => $item["propriete_article_id"]
+            ])->update(["valeur" => $item["valeur"]])
         ) ;
 
         $this->dispatchBrowserEvent("showSuccessMessage",["message" => "Article Mis à jour effectué !"]) ;
+
+        $this->ArticlePage = ARTICLELISTE;
     }
 
     //Cette fonction permet de nettoyer un fichier temporaire
