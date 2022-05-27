@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Hash;
 
 class Utilisateurs extends Component
 {
-    
+
     use WithPagination ;
     public $search = "";
-    
+
     protected $paginationTheme = 'bootstrap';
     public $isbtnaddClick = false ; //verifier si le nouvel user a été ajouté
 
@@ -67,14 +67,14 @@ class Utilisateurs extends Component
 
         Carbon::setLocale("fr"); //Traduction de la page en français
         $rechercherParNom = "%".$this->search."%";
-        $users = User::where("nom","like",$rechercherParNom)->latest()->paginate(5);
+        $users = User::where("nom","like",$rechercherParNom)->latest()->paginate(8);
         return view('livewire.utilisateurs.index' , ["users" => $users])
             ->extends('layouts.master')
             ->section('content');
     }
 
 
-    
+
     public function gotoaddUser(){
         $this->currentPage = PAGECREATEFORM;
     }
@@ -98,6 +98,7 @@ class Utilisateurs extends Component
         } ;
         $rolesId = array_map( $mapForCB ,User::find($this->editUser["id"])->roles->toArray());
         $permissionsId = array_map( $mapForCB ,User::find($this->editUser["id"])->roles->toArray());
+
 
         foreach(Role::all() as $role){
             if(in_array($role->id , $rolesId)){
@@ -132,7 +133,7 @@ class Utilisateurs extends Component
             if($permission["active"]){
                 User::find($this->editUser["id"])->permissions()->attach($permission["permission_id"]) ;
             }
-            
+
         }
 
         $this->dispatchBrowserEvent("showSuccessMessage",["message" =>
@@ -150,7 +151,7 @@ class Utilisateurs extends Component
       //$this->validate();
      // dump($validationAttributes) ;
 
-      // $this->dispatchBrowserEvent("showMessageSuccessAdd",["message","Utilisateur crée avec succès"]);
+       $this->dispatchBrowserEvent("showMessageSuccess",["message","Utilisateur crée avec succès"]);
     }
 
     public function confirmAdd(){
@@ -178,7 +179,7 @@ class Utilisateurs extends Component
     public function updateUser(){
         $validationAttributes = $this->validate();
         User::find($this->editUser['id'])->update($validationAttributes["editUser"]);
-        $this->dispatchBrowserEvent("showUpdate",["message" =>
+        $this->dispatchBrowserEvent("showSuccessMessage",["message" =>
          "Utilisateur mis à jour avec succès ! "]);
     }
 

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('materiels', function (Blueprint $table) {
             $table->id();
             $table->string("nom")->unique();
-            $table->string("description");
+            // $table->string("description");
             $table->boolean('estDisponible')->default(1);
             $table->string("photo");
             $table->foreignId("categorie_id")->constrained("categories");

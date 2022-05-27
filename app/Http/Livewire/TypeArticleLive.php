@@ -107,11 +107,7 @@ class TypeArticleLive extends Component
         $this->dispatchBrowserEvent("showSuccessMessage",["message" =>
          "Type d'article supprimé avec succès !"]);
     }
-
-
     //Propriete
-
-
 
     public function gotoPropriete(TypeArticle $typeArticle){
         $this->selectedTypeArticle = $typeArticle ;

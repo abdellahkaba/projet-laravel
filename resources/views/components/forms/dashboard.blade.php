@@ -133,20 +133,21 @@
                     </ul>
                 </li>
                 @endcan
-
-                <li class="nav-header">Locations</li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-exchange-alt"></i>
-                        <p>Gestion Location</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>Gestion Client</p>
-                    </a>
-                </li>
+                @can('employe')
+                    <li class="nav-header">Locations</li>
+                    <li class="nav-item">
+                        <a href="{{ route('employe.locations.locations.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-exchange-alt"></i>
+                            <p>Gestion Location</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('employe.clients.clients.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Gestion Client</p>
+                        </a>
+                    </li>
+                @endcan
                 <li class="nav-header">Caisse</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">

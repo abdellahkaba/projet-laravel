@@ -33,15 +33,18 @@ class ArticleLive extends Component
     public $ArticlePage = ARTICLELISTE;
 
     //Validation definie pour l'edition de l'article
-    protected function rules(){
-
-            return [
-                'editArticle.nom' => ['required' , Rule::unique("articles,nom")->ignore($this->editArticle['id'])],
-                'editArticle.noSerie' => ['required' , Rule::unique("articles,noSerie")->ignore($this->editArticle['id'])],
+    public function rules(){
+        if($this->ArticlePage == ARTICLEEDIT){
+             return [
+                'editArticle.nom' => ['required' , Rule::unique("articles,nom")->ignore($this->editArticle["id"])],
+                'editArticle.noSerie' => ['required' , Rule::unique("articles,noSerie")->ignore($this->editArticle["id"])],
                 'editArticle.type_article_id' => 'required|exists:App\Models\TypeArticle,id',
                 'editArticle.article_proprietes.*.valeur' => 'required'
 
             ] ;
+        }
+
+        //return $this->addArticle();
     }
 
     public function render(){
@@ -89,15 +92,15 @@ class ArticleLive extends Component
     //page ajout Article
 
     public function gotoaddArticle(){
+        $this->addArticle = [];
        $this->ArticlePage = ARTICLECREATE ;
+
     }
 
 
 
     // Ajout d'un article
     public function addArticle(){
-
-
         $validateArr = [
             "addArticle.nom" => "string|min:3|required|unique:articles,nom",
             "addArticle.noSerie" => "string|max:50|min:3|required|unique:articles,noSerie",
@@ -109,8 +112,6 @@ class ArticleLive extends Component
             $propId = [] ;
 
         foreach($this->proprieteArticles ? : [] as $propriete){
-
-
             $field = "addArticle.prop.".$propriete->nom ;
             $propId[$propriete->nom] = $propriete->id ;
 
@@ -161,7 +162,10 @@ class ArticleLive extends Component
 
         $this->proprieteArticles = [] ;
         $validatedData = [] ;
+        $this->addArticle = [];
+        $this->addPhoto = [] ;
         $this->ArticlePage  = ARTICLELISTE ;
+       // $this->customerErrorMessage = [] ;
     }
     public function gotoListArticle(){
         $this->ArticlePage = ARTICLELISTE  ;
@@ -216,11 +220,24 @@ class ArticleLive extends Component
 
         $this->editArticleValue = $this->editArticle ;
 
+        $this->editPhoto = null;
+
 
 
     }
     //confirmation delete d'article
-    public function confirmDelete(Article $article){
+    public function confirmDelete($id){
+        $this->dispatchBrowserEvent("showConfirmMessage", ["message" =>
+        [
+                "text" => "Vous êtes sur le point de supprimer cet article  de la liste d'article
+                Voulez-vous continuer ? ",
+                "title" => "Êtes-vous sûr de continuer ? ",
+                "type" =>"warning",
+                "data" => [
+                    "article_id" => $id
+                ]
+            ]
+        ]);
 
     }
     // initialisation de la table
@@ -249,14 +266,14 @@ class ArticleLive extends Component
             //Redimensionner une image
             $image = Image::make(public_path($imagePath))->fit(204,204) ;
 
-            dump($image->save()) ;
+            $image->save() ;
 
             //suppression de l'ancienne image par la nouvelle
             Storage::disk("local")->delete(str_replace("storage/","public" , $article->imageUrl()));
 
             $article->imageUrl = $imagePath ;
         }
-
+;
         $article->save() ;
 
         //Recuperer la proprieté article et mettre à jour sa valeur
@@ -290,5 +307,25 @@ class ArticleLive extends Component
                $storage->delete($pathFileName) ;
            }
         }
+    }
+
+    //Suppression de l'article
+
+    public function deleteArticle(Article $article){
+        //S'il y'a pas de location on le supprime
+        if(count($article->locations)>0){
+            $this->dispatchBrowserEvent("showDangerMessage",["message" =>
+            "Desolé ce article est en cours de Location !"]);
+            return ;
+        }
+        //supression d'abord des rélations qui relient aux à cet article
+        if(count($article->article_proprietes)>0)
+            $article->article_proprietes()->where("article_id",$article->id)->delete() ;
+        if(count($article->tarifications)>0)
+            $article->tarifications()->where("article_id",$article->id)->delete() ;
+        $article->delete();
+
+        $this->dispatchBrowserEvent("showSuccessMessage",["message" =>
+        "L'article  supprimé avec succès !"]);
     }
 }

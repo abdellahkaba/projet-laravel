@@ -111,5 +111,5 @@
         </form>
     </div>
 </div>
-<button class="btn btn-link" wire:click="confirmAdd()">click</button>
+
 

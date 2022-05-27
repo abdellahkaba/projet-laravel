@@ -15,13 +15,13 @@ class MaterielFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition()
-    { 
+    {
         return [
-            "nom" => $this->faker->lastName, 
-            "description" => $this->faker->title,
+            "nom" => $this->faker->lastName,
+            // "description" => $this->faker->text,
             "estDisponible" => rand(0,1) ,
             "photo" => "images/imageplaceholder.png",
-            "categorie_id" => rand(1,4),    
+            "categorie_id" => rand(1,4),
         ];
     }
 }

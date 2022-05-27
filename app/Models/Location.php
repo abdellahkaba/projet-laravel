@@ -14,11 +14,13 @@ class Location extends Model
 {
     use HasFactory;
 
+    protected $fillable = ["article_id", "dateDebut","dateFin","client_id","user_id","statut_location_id","created_at","updated_at"] ;
+
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function statut(){
-        return $this->belongsTo(StatutLocation::class);
+    public function statuts(){
+        return $this->belongsTo(StatutLocation::class , "statut_location_id","id");
     }
     public function client(){
         return $this->belongsTo(Client::class);
@@ -26,8 +28,8 @@ class Location extends Model
     public function paiements(){
         return $this->hasMany(Paiement::class);
     }
-    
-    public function articles(){
-        return $this->belongsToMany(Article::class,"article_location","location_id","article_id");
+    public function article(){
+        return $this->belongsTo(Article::class);
     }
+   
 }

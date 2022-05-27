@@ -4,7 +4,7 @@
             <div class="card-header bg-gradient-primary">
                 <h3 class="card-title"> <i class="fas fa-list fa-2x"></i> Liste des Articles</h3>
                 <div class="card-tools align-items-center d-flex">
-                    <a href="" class="btn btn-link text-white mr-4 d-block" wire:click.prevent="gotoaddArticle()">
+                    <a href="" class="btn btn-link text-white mr-4 d-block" style="background-color: #006 ; border-color: #0062cc " wire:click.prevent="gotoaddArticle()">
                         <i class="fas fa-user-plus"></i>
                         Ajouter un article
                     </a>
@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body table-responsive p-0 table-striped">
+            <div class="card-body table-responsive p-0 table-striped" style="height: 590px">
                 <div class="d-flex justify-content-end p-4 bg-indigo">
                     <div class="form-group mr-3">
                         <label for="filtreType">Filtrer par Type</label>
@@ -38,7 +38,7 @@
                         </select>
                     </div>
                 </div>
-               <div style="height: 300px">
+               <div style="height: 275px">
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
                         <tr>
@@ -63,15 +63,21 @@
                                 <td class="text-center">{{ $article->nom }} - {{ $article->noSerie }}</td>
                                 <td class="text-center">{{ $article->type->nom }}</td>
                                 <td class="text-center">
-                                    @if($article->estDisponible)
-                                        <span class="badge badge-success">Disponible</span>
-                                    @else
+                                    @if(count($article->locations)>0)
+
                                         <span class="badge badge-danger">Indisponible</span>
+                                    @else
+                                        <span class="badge badge-success">Disponible</span>
                                     @endif
                                 </td>
 
                                 <td class="text-center">{{ optional($article->created_at)->diffForHumans() }}</td>
                                 <td class="text-center">
+
+                                    <a title="Tarif {{ $article->nom }}" href="{{ route('admin.gestarticles.articles.tarifs',['articleId' => $article->id]) }}" class="btn btn-link bg-purple">Tarifs <i class="fas fa-money-check"></i>
+                                    </a>
+                                    <a title="Location {{ $article->nom }}" href="{{ route('admin.gestarticles.articles.location',['articleId' => $article->id]) }}" class="btn btn-link bg-gradient-blue">Loué <i class="fas fa-money-check"></i>
+                                    </a>
                                     <button class="btn btn-success" wire:click="editArticle('{{ $article->id }}')">Modifier <i class="far fa-edit"></i></button>
                                     <button class="btn btn-danger" wire:click="confirmDelete('{{ $article->id }}')">Delete <i class="far fa-trash-alt"></i></button>
                                 </td>

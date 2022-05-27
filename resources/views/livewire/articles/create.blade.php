@@ -1,21 +1,21 @@
 <div class="row p-4 pt-5">
     <div class="col-8">
-        <div class="card card-primary">
+        <div class="card card-dark text-bg-dark">
             <div class="card-header">
                 <h3 class="card-title"> <i class="fas fa-user-plus fa-2x"></i> Formulaire d'ajout d'un Article</h3>
             </div>
             <form role="form" wire:submit.prevent="addArticle()">
                 <div class="card-body">
                     @if($errors->any())
-                            <div class="alert alert-danger">
-                                <h3><i class="icon fas fa-ban"></i>Erreur !</h3>
+                            <div class="alert alert-danger" >
+                                <h3><i class="icon fas fa-ban close" data-dismiss="alert" aria-label="close" id="hide"> &times;</i>Erreur !</h3>
                                 <ul>
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif
+                    @endif
                     <div class="d-flex">
 
                         <div class=" my-4 p-3 flex-grow-1 bg-light">
@@ -43,7 +43,7 @@
                                     @foreach ($proprieteArticles as $propriete)
                                         <div class="form-group">
                                             <label for="">
-                                                {{ $propriete->nom }} @if(!$propriete->estObligatoire)(Optionel) @endif
+                                                 {{ $propriete->nom }} @if(!$propriete->estObligatoire)(Optionel) @endif
                                             </label>
                                             @php
                                                 $field = "addArticle.prop.".$propriete->nom ;
@@ -71,7 +71,7 @@
 
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Ajouté</button>
-                    <button type="submit" wire:click.prevent="gotoListArticle()" class="btn btn-danger">Retour à la Liste des Articles</button>
+                    <button type="submit" wire:click.prevent="gotoListArticle()" class="btn btn-danger"><i class="fas fa-long-arrow-alt-left"></i>Retour à la Liste des Articles </button>
 
                 </div>
             </form>

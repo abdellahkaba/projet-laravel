@@ -16,7 +16,6 @@ class StatutLocationSeeder extends Seeder
     public function run()
     {
         DB::table("statut_locations")->insert([
-            ["nom" => "En attante"],
             ["nom" => "En cours"],
             ["nom" => "Terminé"],
         ]);

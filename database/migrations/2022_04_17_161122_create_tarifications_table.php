@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('tarifications', function (Blueprint $table) {
             $table->id();
             $table->double("prix");
-            $table->foreignId("duree_location_id")->constrained("statut_locations");
+            $table->foreignId("duree_location_id")->constrained("duree_locations");
             $table->foreignId("article_id")->constrained("articles");
             $table->timestamps();
+            $table->unique(["duree_location_id","article_id"]) ;
         });
 
         Schema::enableForeignKeyConstraints();

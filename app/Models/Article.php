@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Location;
 use App\Models\Categorie;
 use App\Models\TypeArticle;
 use App\Models\Tarification;
 use App\Models\ArticlePropriete;
+use App\Models\ProprieteArticle;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -22,7 +24,7 @@ class Article extends Model
     }
 
     public function locations(){
-          return $this->belongsToMany(Location::class, "article_location", "article_id","location_id");
+          return $this->hasMany(Location::class);
     }
 
 

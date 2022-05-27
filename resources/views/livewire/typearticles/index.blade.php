@@ -3,10 +3,10 @@
     <div class="row p-4 pt-5">
         <div class="col-12">
             <div class="card">
-                <div class="card-header bg-gradient-primary">
+                <div class="card-header bg-primary">
                     <h3 class="card-title"> <i class="fas fa-list fa-2x"></i> Liste des types d'article</h3>
                     <div class="card-tools align-items-center d-flex">
-                        <a href="" class="btn btn-link text-white mr-4 d-block" wire:click.prevent="showTypeArticleForm">
+                        <a href="" class="btn btn-link text-white mr-4 d-block" style="background-color:blueviolet" wire:click.prevent="showTypeArticleForm">
                             <i class="fas fa-user-plus"></i>
                             Nouveau type d'article
                         </a>
@@ -46,9 +46,9 @@
                                             @enderror
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-link" wire:click.prevent="addNewTypeArticle"><i class="fa fa-check"></i>Valider
+                                        <button class="btn btn-success" wire:click.prevent="addNewTypeArticle"><i class="fa fa-check"></i>Valider
                                         </button>
-                                        <button class="btn btn-link" wire:click.prevent="showTypeArticleForm"><i class="far fa-trash-alt" ></i>Annuler
+                                        <button class="btn btn-danger" wire:click.prevent="showTypeArticleForm"><i class="far fa-trash-alt" ></i>Annuler
                                         </button>
                                     </td>
                                 </tr>
@@ -63,7 +63,7 @@
                                         </button>
                                         <button  class="btn btn-info" wire:click="gotoPropriete('{{ $typearticle->id }}')"><i class="fa fa-list">Proprietés</i>
                                         </button>
-                                        @if (count($typearticle->articles) == 0)
+                                        @if (count($typearticle->articles) == 0 && count($typearticle->proprietes) == 0)
                                         <button class="btn btn-danger" wire:click="confirmDelete('{{ $typearticle->id }}')">Delete <i class="far fa-trash-alt"></i></button>
                                         @endif
 

@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Livewire\ClientLive;
+use App\Http\Livewire\ArticleLive;
+use App\Http\Livewire\LocationLive;
+use App\Http\Livewire\MaterielLive;
+use App\Http\Livewire\Utilisateurs;
+use App\Http\Livewire\CategorieLive;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Livewire\ArticleLive;
-use App\Http\Livewire\CategorieLive;
-use App\Http\Livewire\MaterielLive;
 use App\Http\Livewire\TypeArticleLive;
-use App\Http\Livewire\Utilisateurs;
+use App\Http\Livewire\TarificationLive;
+use App\Http\Controllers\UserController;
+use App\Http\Livewire\PaiementLive;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +51,8 @@ Route::group([
         //Mapper la route à un composant livewire et accession par une route
         Route::get("/types",TypeArticleLive::class)->name("types");
         Route::get("/articles",ArticleLive::class)->name("articles");
+        Route::get("/articles/{articleId}/tarifs",TarificationLive::class)->name("articles.tarifs");
+        Route::get("/articles/{articleId}/location",LocationLive::class)->name("articles.location");
     });
     Route::group([
         "prefix" =>"gestmateriels",
@@ -57,4 +63,25 @@ Route::group([
         Route::get("/materiels",MaterielLive::class)->name("materiels");
     });
 });
-// Route::get('/habilitations/utilisateurs', [UserController::class,'index'])->name('utilisateurs');
+
+Route::group([
+    "middleware" =>["auth","employe"],
+    "as" => "employe.",
+],function(){
+    Route::group([
+        "prefix"=> "locations",
+        "as" => "locations."
+    ],function(){
+        Route::get("/locations",LocationLive::class)->name("locations.index");
+        Route::get("/locations/{locationId}/paiements",PaiementLive::class)->name("locations.paiements");
+    });
+    Route::group([
+        "prefix" => "clients",
+        "as" => "clients."
+    ],function(){
+        Route::get("/clients",ClientLive::class)->name("clients.index");
+    });
+
+
+}
+);

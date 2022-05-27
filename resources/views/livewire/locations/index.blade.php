@@ -1,27 +1,26 @@
 <div>
-    @if($ArticlePage == PAGECREATEFORM)
-       @include("livewire.articles.create")
+    @if($currentPage == PAGECREATEFORM)
+       @include("livewire.locations.create")
     @endif
-    @if($ArticlePage == PAGEEDITFORM)
-        @include("livewire.articles.edit")
+    @if($currentPage == PAGEEDITFORM)
+        @include("livewire.locations.edit")
     @endif
-    @if($ArticlePage == PAGELISTE)
-        @include("livewire.articles.liste")
+    @if($currentPage == PAGELISTE)
+        @include("livewire.locations.liste")
     @endif
 </div>
 
 <script>
     window.addEventListener("showSuccessMessage", event =>{
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: event.detail.message || "Operation effectuée avec succès.",
-            showConfirmButton: false,
-            timer: 4000
-        })
+     Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: event.detail.message || "Operation effectuée avec succès.",
+        showConfirmButton: false,
+        timer: 4000
     })
+})
 </script>
-
 <script>
     window.addEventListener("showConfirmMessage", event=>{
         Swal.fire({
@@ -36,7 +35,7 @@
             }).then((result) => {
             if (result.isConfirmed) {
                 if(event.detail.message.data){
-                   @this.deleteArticle(event.detail.message.data.article_id)
+                   @this.deleteLocation(event.detail.message.data.location_id)
                 }
               //  @this.deleteProp(event.detail.message.data.propriete_article_id)
 

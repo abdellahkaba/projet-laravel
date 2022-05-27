@@ -1,14 +1,14 @@
 <div class="row p-4 pt-5">
     <div class="col-12">
         <div class="card">
-            <div class="card-header bg-primary">
-                <h1 class="card-title"> <i class="fas fa-users fa-2x"></i> Liste des Utilisateurs</h1>
+            <div class="card-header bg-gradient-primary">
+                <h1 class="card-title"> <i class="fas fa-users fa-2x"></i> Liste des Clients</h1>
 
                 <div class="card-tools align-items-center d-flex">
                     <h1>
-                        <a href="" class="btn btn-link text-white mr-4 d-block" style="background-color: green" wire:click.prevent="gotoaddUser()">
+                        <a href="" class="btn btn-link text-white mr-4 d-block" style="background-color: #622452" wire:click.prevent="gotoaddClient()">
                             <i class="fas fa-user-plus"></i>
-                            Nouvel Utilisateur
+                            Nouveau client
                         </a>
                     </h1>
                     <div class="input-group input-group-sm" style="width: 150px;">
@@ -25,34 +25,30 @@
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
                         <tr>
-                            <th style="width:5% " class="text-center"></th>
-                            <th style="width: 25% " class="text-center">Utilisateur</th>
+                            <th style="width: 5% " class="text-center"></th>
+                            <th style="width: 25% " class="text-center">Client</th>
                             <th style="width: 30%" class="text-center">Role</th>
                             <th style="width: 30%" class="text-center">Ajouté</th>
                             <th style="width: 20%" class="text-center">Action</th>
-
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($users as $user)
+                        @foreach($clients as $client)
                         <tr>
                             <td>
-                                @if ($user->sexe == "F")
+                                @if ($client->sexe == "F")
                                     <img src="{{ asset('images/manager.png') }}" width="25" />
                                 @else
                                     <img src="{{ asset('images/bussiness-man.png') }}" width="25" />
                                 @endif
                             </td>
-                            <td class="text-center">{{ $user->nom }} {{ $user->prenom }}</td>
-                            <td class="text-center">{{ $user->all_role_names }}</td>
+                            <td class="text-center">{{ $client->nom }} {{ $client->prenom }}</td>
+                            <td class="text-center">-----------</td>
                             <td class="text-center"><span class="tag tag-success">
-                                {{ $user->created_at->diffForHumans() }}</span></td>
+                                {{ $client->created_at->diffForHumans() }}</span></td>
                             <td class="text-center">
-                                <button class="btn btn-success" wire:click="gotoEditUser('{{ $user->id }}')">Edit <i class="far fa-edit"></i></button>
-                                @if (count($user->roles) == 0)
-                                    <button class="btn btn-danger" wire:click="confirmDelete('{{ $user->id }}')">Delete <i class="far fa-trash-alt"></i></button>
-                                @endif
-
+                                <button class="btn btn-success" wire:click="gotoEditClient('{{ $client->id }}')">Edit <i class="far fa-edit"></i></button>
+                                <button class="btn btn-danger" wire:click="confirmDelete('{{ $client->id }}')">Delete <i class="far fa-trash-alt"></i></button>
                             </td>
                         </tr>
                         @endforeach
@@ -62,11 +58,13 @@
             </div>
             <div class="cadre-footer">
                 <div class="float-right">
-                {{ $users->links() }}
+                {{ $clients->links() }}
                 </div>
 
             </div>
         </div>
     </div>
 </div>
+
+
 

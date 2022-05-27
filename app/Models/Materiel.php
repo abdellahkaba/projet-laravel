@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Materiel extends Model
 {
     use HasFactory;
-    protected $fillable = ["nom","photo","estDisponible","categorie_id","created_at","updated_at"] ;
+    protected $fillable = ["nom","estDisponible", "photo" , "categorie_id","created_at","updated_at"] ;
     public function categories(){
         return $this->belongsTo(Categorie::class , "categorie_id","id");
     }
