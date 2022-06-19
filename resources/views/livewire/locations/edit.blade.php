@@ -3,87 +3,59 @@
         <div class="card-header">
             <h3 class="card-title"> <i class="fas fa-user-plus fa-2x"></i> Formulaire de Modification d'une Location</h3>
         </div>
-        <form role="form" wire:submit.prevent="editLocation()">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="">Date de Location</label>
-                            <input type="date" wire:model="editLocation.dateDebut" class="form-control
-                             @error('editLocation.dateDebut')
-                            is-invalid
-                             @enderror">
-                            @error('editLocation.dateDebut')
-                             <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
+        <form role="form" wire:submit.prevent="updateLocation()">
+                    <div class="p-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for=""><span class="text-indigo">Date de mis à jour de la fin de location</span></label>
+                                    <input type="date" wire:model="editLocation.dateDebut" class="form-control
+                                     @error('editLocation.dateDebut')
+                                    is-invalid
+                                     @enderror">
+                                    @error('editLocation.dateDebut')
+                                     <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for=""><span class="text-indigo">Choisir le Statut Terminer</span> </label>
+                                    <select
+                                        wire:model="editLocation.statut_location_id"
+                                        class="form-control
+                                            @error('editLocation.statut_location_id')
+                                                is-invalid
+                                            @enderror">
+                                        <option value="selected"></option>
+                                        @foreach ($statuts as $statut)
+                                            <option value="{{ $statut->id }}">{{ $statut->nom }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('editLocation.statut_location_id')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for=""><span class="text-indigo">Choisir Ton nom en tant Modificateur</span></label>
+                                    <select wire:model="editLocation.user" class="form-control @error('editLocation.user_id')
+                                    is-invalid
+                                @enderror">
+                                        <option value=""></option>
+                                        @foreach ($users as $user)
+                                            <option value = "{{ $user->id }} "> {{ $user->nom }} {{ $user->prenom }} </option>
+                                        @endforeach
+                                    </select>
+                                    @error('editLocation.user_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                                </div>
+                            </div>
+                        </div> 
                     </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="">Date de Fin</label>
-                            <input type="date" wire:model="editLocation.dateFin" class="form-control
-                            @error('editLocation.dateFin')
-                            is-invalid
-                             @enderror">
-                            @error('editLocation.dateFin')
-                             <span class="text-danger">{{ $message }}</span>
-                            @enderror
-
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="">Client</label>
-                            <select wire:model="editLocation.client" class="form-control @error('editLocation.client_id')
-                            is-invalid
-                        @enderror
-                        ">
-                                <option value=""></option>
-                                @foreach ($clients as $client)
-                                    <option value = "{{ $client->id }} "> {{ $client->nom }} </option>
-                                @endforeach
-                            </select>
-                            @error('editLocation.client_id')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="">Nom Employé</label>
-                            <select wire:model="editLocation.user" class="form-control @error('editLocation.user_id')
-                            is-invalid
-                        @enderror">
-                                <option value=""></option>
-                                @foreach ($users as $user)
-                                    <option value = "{{ $user->id }} "> {{ $user->nom }} </option>
-                                @endforeach
-                            </select>
-                            @error('editLocation.user_id')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="">Statut de Location</label>
-                            <select class="form-control @error('editLocation.statut_location_id')
-                                is-invalid
-                            @enderror" wire:model="editLocation.statuts">
-                                <option value=""></option>
-                                @foreach ($statuts as $statut)
-                                    <option value = "{{ $statut->id }} "> {{ $statut->nom }} </option>
-                                @endforeach
-                            </select>
-                            @error('editLocation.statut_location_id')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-            </div>
+              
 
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Ajouté</button>

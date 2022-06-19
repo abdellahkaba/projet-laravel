@@ -1,6 +1,6 @@
 <div class="row p-4 pt-5">
     <div class="col-8">
-        <div class="card card-dark text-bg-dark">
+        <div class="card card-indigo text-bg-indigo">
             <div class="card-header">
                 <h3 class="card-title"> <i class="fas fa-user-plus fa-2x"></i> Formulaire d'ajout d'un Article</h3>
             </div>
@@ -20,16 +20,16 @@
 
                         <div class=" my-4 p-3 flex-grow-1 bg-light">
                             <div class="form-group">
-                                <label for="">Nom</label>
+                                <label for=""><span class="text-indigo">Nom</span></label>
                                 <input type="text" class="form-control" wire:model="addArticle.nom">
                             </div>
                             <div class="form-group">
-                                <label for="">Numero de Série</label>
+                                <label for=""><span class="text-indigo">Numéro de Série</span></label>
                                 <input type="text" class="form-control" wire:model="addArticle.noSerie">
                             </div>
                             <div class="form-group">
-                                <label for="">Type</label>
-                                <select class="form-control" wire:model="addArticle.type">
+                                <label for=""><span class="text-indigo">Type Article</span></label>
+                                <select class="form-control text-indigo" wire:model="addArticle.type">
                                     <option value=""></option>
                                     @foreach ($typearticles as $typearticle)
                                         <option value = "{{ $typearticle->id }} "> {{ $typearticle->nom }} </option>
@@ -42,13 +42,13 @@
                                 <div class="my-3 bg-gray-info p-3">
                                     @foreach ($proprieteArticles as $propriete)
                                         <div class="form-group">
-                                            <label for="">
+                                            <label for="" class="text-indigo">
                                                  {{ $propriete->nom }} @if(!$propriete->estObligatoire)(Optionel) @endif
                                             </label>
                                             @php
                                                 $field = "addArticle.prop.".$propriete->nom ;
                                             @endphp
-                                            <input type="text" class="form-control" wire:model="{{ $field }}">
+                                            <input type="text" class="form-control text-indigo" wire:model="{{ $field }}">
                                         </div>
                                     @endforeach
                                 </div>

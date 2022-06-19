@@ -9,8 +9,8 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="">Nom</label>
-                                <input type="name" wire:model="editUser.nom" class="form-control @error('editUser.nom')
+                                <label for=""><span class="text-indigo">Nom</span></label>
+                                <input type="name" wire:model="editUser.nom" class="form-control text-bold text-blue @error('editUser.nom')
                                    is-invalid
                                 @enderror">
                                 @error('editUser.nom')
@@ -20,8 +20,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="">Prenom</label>
-                                <input type="name" wire:model="editUser.prenom" class="form-control @error('editUser.prenom')
+                                <label for=""><span class="text-indigo">Prénom</span></label>
+                                <input type="name" wire:model="editUser.prenom" class="form-control text-bold text-blue @error('editUser.prenom')
                                     is-invalid
                                 @enderror" >
                                 @error('editUser.prenom')
@@ -31,13 +31,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="">Sexe</label>
-                        <select name="" id=""wire:model="editUser.sexe" class="form-control @error('editUser.sexe')
+                        <label for=""><span class="text-indigo">Sexe</span></label>
+                        <select name="" id=""wire:model="editUser.sexe" class="form-control text-bold text-blue @error('editUser.sexe')
                             is-invalid
                         @enderror" >
                             <option value="">--------------</option>
-                            <option value="H">Homme</option>
-                            <option value="F">Femme</option>
+                            <option value="H"><span class="text-indigo">Homme</span></option>
+                            <option value="F"><span class="text-indigo">Femme</span></option>
                         </select>
                             @error('editUser.sexe')
                                 <span class="text-danger">{{ $message }}</span>
@@ -46,8 +46,8 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="">Telephone</label>
-                                <input type="name" wire:model="editUser.telephone" class="form-control @error('editUser.telephone')
+                                <label for=""><span class="text-indigo">Téléphone</span></label>
+                                <input type="name" wire:model="editUser.telephone" class="form-control text-bold text-blue @error('editUser.telephone')
                                     is-invalid
                                 @enderror" >
                                 @error('editUser.telephone')
@@ -57,8 +57,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="">Adresse</label>
-                                <input type="name" wire:model="editUser.adresse" class="form-control @error('editUser.adresse')
+                                <label for=""><span class="text-indigo">Adresse</span></label>
+                                <input type="name" wire:model="editUser.adresse" class="form-control text-bold text-blue @error('editUser.adresse')
                                     is-invalid
                                 @enderror" >
                                 @error('editUser.adresse')
@@ -68,8 +68,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="">Email</label>
-                        <input type="email"wire:model="editUser.email" class="form-control @error('editUser.email')
+                        <label for=""><span class="text-indigo">Email</span></label>
+                        <input type="email"wire:model="editUser.email" class="form-control text-bold text-blue @error('editUser.email')
                             is-invalid
                         @enderror" >
                         @error('editUser.email')
@@ -77,7 +77,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="">Password</label>
+                        <label for=""><span class="text-indigo">password</span></label>
                         <input type="password" class="form-control" disabled placeholder="Mot de Pass">
                     </div>
                 </div>
@@ -137,7 +137,7 @@
                                 </div>
                             @endforeach
 
-                            @json($rolesPermissions["roles"]);
+                            {{-- @json($rolesPermissions["roles"]); --}}
                         </div>
                     </div>
                     <div class="pt-3">
@@ -160,7 +160,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                                    @json($rolesPermissions["permissions"]);
+                                    {{-- @json($rolesPermissions["permissions"]); --}}
                             </tbody>
                         </table>
                     </div>

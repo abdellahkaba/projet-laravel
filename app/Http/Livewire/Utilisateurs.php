@@ -6,12 +6,14 @@ use Carbon\Carbon;
 use App\Models\Role;
 use App\Models\User;
 
+use App\Models\Image;
 use Livewire\Component;
 use App\Models\Permission;
 use Livewire\WithPagination;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class Utilisateurs extends Component
 {
@@ -49,6 +51,8 @@ class Utilisateurs extends Component
             'newUser.telephone' => 'required|numeric|unique:users,telephone',
             'newUser.adresse' => 'required',
             'newUser.email' => 'required|email|unique:users,email',
+            'newUser.path' => '',
+            // 'newUser.password' => 'required|password|unique:users,password',
         ];
     }
 
@@ -59,6 +63,7 @@ class Utilisateurs extends Component
         'newUser.telephone.required' => 'Donner un contact.',
         'newUser.email.required' => 'Saisir l\'adresse email.',
         'newUser.adresse.required' => 'Saisir l\'adresse.',
+        // 'newUser.password.required' => 'Saisir le mot de pass.',
     ];
 
 
@@ -67,7 +72,7 @@ class Utilisateurs extends Component
 
         Carbon::setLocale("fr"); //Traduction de la page en français
         $rechercherParNom = "%".$this->search."%";
-        $users = User::where("nom","like",$rechercherParNom)->latest()->paginate(8);
+        $users = User::where("nom","like",$rechercherParNom)->orWhere("prenom","LIKE","%".  $rechercherParNom ."%")->latest()->paginate(8);
         return view('livewire.utilisateurs.index' , ["users" => $users])
             ->extends('layouts.master')
             ->section('content');
@@ -141,17 +146,17 @@ class Utilisateurs extends Component
     }
 
     public function addUser(){
+
+
        $validationAttributes = $this->validate();
-       $validationAttributes["newUser"]["password"] = "password";
+       $validationAttributes["newUser"]["password"] = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+       $validationAttributes["newUser"]["email_verified_at"] = now() ;
+        User::create($validationAttributes["newUser"]);
+        $this->newUser = [];
+     $this->dispatchBrowserEvent("showSuccessMessage",["message" =>
+     "Utilisateur Ajouté avec succèss ! "]);
 
-
-       User::create($validationAttributes["newUser"]);
-       $this->newUser = [];
-
-      //$this->validate();
-     // dump($validationAttributes) ;
-
-       $this->dispatchBrowserEvent("showMessageSuccess",["message","Utilisateur crée avec succès"]);
+     $this->currentPage = PAGELISTE;
     }
 
     public function confirmAdd(){
@@ -181,10 +186,12 @@ class Utilisateurs extends Component
         User::find($this->editUser['id'])->update($validationAttributes["editUser"]);
         $this->dispatchBrowserEvent("showSuccessMessage",["message" =>
          "Utilisateur mis à jour avec succès ! "]);
+
+         $this->currentPage = PAGELISTE;
     }
 
     //confirmation de la suppression
-    public function confirmDelete($id){
+    public function confirmDelete(User $user){
         $this->dispatchBrowserEvent("showConfirmMessage", ["message" =>
         [
             "text" => "Vous êtes sur le point de supprimer cet Utilisateur
@@ -192,15 +199,21 @@ class Utilisateurs extends Component
             "title" => "Êtes-vous sûr de continuer ? ",
             "type" =>"warning",
             "data" => [
-                "user_id" => $id
+                "user_id" => $user
             ]
         ]
         ]);
     }
 
     //function de suppression
-    public function deleteUser($id){
-        User::destroy($id);
+    public function deleteUser(User $user){
+        if(count($user->paiement)>0){
+            $this->dispatchBrowserEvent("showDangerMessage",["message" =>
+            "Desolé ce Utilisateur est lié à un paiement effectué,
+            Veuillez supprimer cela d'abord !"]);
+            return ;
+        }
+        $user->delete();
         $this->dispatchBrowserEvent("showSuccessMessage",["message" =>
          "L'utilisateur supprimé avec succès !"]);
     }

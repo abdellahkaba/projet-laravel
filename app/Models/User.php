@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Role;
+use App\Models\Image;
 use App\Models\Paiement;
 use App\Models\Permission;
 use Laravel\Sanctum\HasApiTokens;
@@ -21,7 +22,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'nom','prenom','sexe','telephone','adresse','email','password',
+        'nom','prenom','sexe','telephone','adresse','email','password', 'email_verified_at'
     ];
 
     /**
@@ -62,8 +63,12 @@ class User extends Authenticatable
     public function paiement(){
         return $this->hasMany(Paiement::class);
     }
-    
+
     public function permissions(){
         return $this->belongsToMany(Permission::class,"user_permission","user_id","permission_id");
+    }
+
+    public function image(){
+        return $this->hasOne(Image::class);
     }
 }

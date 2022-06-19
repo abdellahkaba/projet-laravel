@@ -14,11 +14,11 @@
                 <a href="#" class="d-block">Alexander Pierce</a>
             </div>
         </div> --}}
-
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-link">
-                    <a href="{{ route('home') }}">
+                    {{-- {{ route('home') }} --}}
+                    <a href="{{ route('admin.gestarticles.emails.create') }}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>Acceuil</p>
                     </a>
@@ -33,7 +33,7 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
+                    {{-- <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="#" class="nav-link active">
                                 <i class="far fa-circle nav-icon"></i>
@@ -46,34 +46,37 @@
                                 <p>locations</p>
                             </a>
                         </li>
-                    </ul>
+                    </ul> --}}
                 </li>
                 @endcan
 
-                @can('admin')
-                <li class="nav-item {{ setMenuOpenClass('admin.habilitations.' , 'menu-open') }}">
-                    <a href="#" class="nav-link {{ setMenuOpenClass('admin.habilitations.' , 'active') }}">
+                @can('superadmin')
+                <li class="nav-item {{ setMenuOpenClass('superadmin.habilitations.' , 'menu-open') }}">
+                    <a href="#" class="nav-link {{ setMenuOpenClass('superadmin.habilitations.' , 'active') }}">
                         <i class="fas fa-user-shield"></i>
                         <p>
-                            Habilitations
+                            Gestion des Employés
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('admin.habilitations.users.index') }}" class="nav-link {{ setMenuActive('admin.habilitation.users.index') }} ">
+                            <a href="{{ route('superdamin.habilitations.users.index') }}" class="nav-link {{ setMenuActive('superadmin.habilitation.users.index') }} ">
                                 <i class="fas fa-users-cog"></i>
                                 <p>Utilisateur</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Role et permission</p>
+                        {{-- <li class="nav-item">
+                            <a href="{{ route('superdamin.habilitations.mails.store') }}" class="nav-link {{ setMenuActive('superadmin.habilitation.users.index') }} ">
+                                <i class="fas fa-users-cog"></i>
+                                <p>Notification</p>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
+
+                @endcan
+                @can('admin')
                 <li class="nav-item {{ setMenuOpenClass('admin.gestarticles.' , 'menu-open') }}" >
                     <a href="#" class="nav-link {{ setMenuOpenClass('admin.gestarticles.' , 'active') }}">
                         <i class="nav-icon far fa-circle "></i>
@@ -95,15 +98,9 @@
                                 <p>Articles</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-sliders-h"></i>
-                                <p>Tarification</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
-                <li class="nav-item {{ setMenuOpenClass('admin.gestmateriels.' , 'menu-open') }}" >
+                {{-- <li class="nav-item {{ setMenuOpenClass('admin.gestmateriels.' , 'menu-open') }}" >
                     <a href="#" class="nav-link {{ setMenuOpenClass('admin.gestmateriels.' , 'active') }}">
                         <i class="nav-icon far fa-circle "></i>
                         <p>
@@ -131,15 +128,37 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 @endcan
                 @can('employe')
-                    <li class="nav-header">Locations</li>
-                    <li class="nav-item">
-                        <a href="{{ route('employe.locations.locations.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-exchange-alt"></i>
-                            <p>Gestion Location</p>
+                    <li class="nav-item {{ setMenuOpenClass('employe.locations.' , 'menu-open') }}">
+                        <a href="#" class="nav-link {{ setMenuOpenClass('employe.locations.' , 'active') }}">
+                            <i class="nav-icon far fa-circle "></i>
+                        <p>
+                            Gestion des locations
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item" class="nav-link {{ setMenuActive('employe.location.locations.create') }}">
+                                <a href="{{ route('employe.locations.locations.create') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-exchange-alt"></i>
+                                    <p>Faire une Location</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" class="nav-link {{ setMenuActive('employe.location.locations.kaba') }}">
+                                <a href="{{ route('employe.locations.locations.kaba') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-sliders-h"></i>
+                                    <p>Liste des Locations</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('employe.locations.articles.tarification') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-sliders-h"></i>
+                                    <p>Tarification</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('employe.clients.clients.index') }}" class="nav-link">
@@ -148,13 +167,21 @@
                         </a>
                     </li>
                 @endcan
+                @can('admin')
                 <li class="nav-header">Caisse</li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    {{-- <a href="{{ route('admin.gestarticles.articles.paiments') }}" class="nav-link"> --}}
                         <i class="nav-icon fas fa-sliders-h"></i>
                         <p>Gestion Paiement</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    {{-- <a href="{{ route('admin.gestarticles.mails.create') }}" class="nav-link"> --}}
+                        <i class="nav-icon fas fa-sliders-h"></i>
+                        <p>Recouvrement mail</p>
+                    </a>
+                </li>
+                @endcan
             </ul>
         </nav>
     </div>

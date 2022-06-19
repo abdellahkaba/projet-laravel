@@ -6,12 +6,12 @@
                 <div class="card-header bg-primary">
                     <h3 class="card-title"> <i class="fas fa-list fa-2x"></i> Liste des types d'article</h3>
                     <div class="card-tools align-items-center d-flex">
-                        <a href="" class="btn btn-link text-white mr-4 d-block" style="background-color:blueviolet" wire:click.prevent="showTypeArticleForm">
+                        <a href="" class="btn btn-link text-white mr-4 d-block" style="background-color:blue" wire:click.prevent="showTypeArticleForm">
                             <i class="fas fa-user-plus"></i>
                             Nouveau type d'article
                         </a>
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" wire:model.debounce.100ms="search" class="form-control float-right" placeholder="Search">
+                        <div class="input-group input-group-lg" style="width: 300px;">
+                            <input type="text" name="table_search" wire:model.debounce.100ms="search" class="form-control float-right" placeholder="Recheche un type article">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-default">
                                     <i class="fas fa-search"></i>
@@ -20,13 +20,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body table-responsive p-0 table-striped" style="height: 300px;">
+                <div class="card-body table-responsive p-0 table-striped" style="height: 500px;">
                     <table class="table table-head-fixed text-nowrap">
                         <thead>
                             <tr>
-                                <th style="width: 40%">Type d'article</th>
-                                <th style="width: 40%" class="text-center">Ajouté</th>
-                                <th style="width: 20%" class="text-center">Action</th>
+                                <th style="" class="text-center">Type d'article</th>
+                                {{-- <th style="width: 40%" class="text-center">Ajouté</th> --}}
+                                <th style="" class="text-center">Action</th>
 
                             </tr>
                         </thead>
@@ -56,8 +56,8 @@
 
                             @foreach ($typearticles as $typearticle)
                                 <tr>
-                                    <td>{{ $typearticle->nom }}</td>
-                                    <td class="text-center">{{ optional($typearticle->created_at)->diffForHumans() }}</td>
+                                    <td class="text-center">{{ $typearticle->nom }}</td>
+                                    {{-- <td class="text-center">{{ optional($typearticle->created_at)->diffForHumans() }}</td> --}}
                                     <td class="text-center">
                                         <button class="btn btn-success" wire:click="editTypeArticle('{{ $typearticle->id }}')">Edit <i class="far fa-edit"></i>
                                         </button>

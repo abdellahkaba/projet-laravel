@@ -32,7 +32,7 @@ class TypeArticleLive extends Component
 
 
         $data = [
-            "typearticles" => TypeArticle::where("nom","like",$critereRecherche)->latest()->paginate(3),
+            "typearticles" => TypeArticle::where("nom","like",$critereRecherche)->latest()->paginate(6),
             "proprietesTypeArticles" => ProprieteArticle::where("type_article_id",optional($this->selectedTypeArticle)->id)->latest()->paginate(4)
         ];
 

@@ -16,4 +16,7 @@ class Client extends Model
     public function locations(){
         return $this->hasMany(Location::class);
     }
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 }

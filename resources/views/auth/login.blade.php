@@ -2,40 +2,47 @@
 
 @section('form')
 
-<div class="card">
-    <div class="card-body login-card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-            <div class="input-group mb-3">
-                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                placeholder="Email" value="{{ old('email') }}"
-                required autocomplete="email" autofocus>
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-envelope"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="input-group mb-3">
-                <input type="password" class="form-control @error('password') is-invalid @enderror"
-                placeholder="Mot de pass" name="password" required autocomplete="current-password">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
+<div class="container text-align-center" style="margin: -35%">
+    <div class="login-box container" style="width: 700px">
+        <div class="login-logo">
+            <img src="{{ asset('images/image1.png') }}" alt="" style="width: 100px; height: 100px">
+            <a href="" style="color: #b3b6b9; font-size: 1.8em;"><b style="font-weigh:bold">Locations</b>Login</a> <hr>
+        </div>
+        <div class="card bg-dark">
+            <div class="card-body login-card-body bg-dark">
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+                        placeholder="Email" value="{{ old('email') }}"
+                        required autocomplete="email" autofocus>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
                         </div>
                     </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
-                </div>
-            </div>
-        </form>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control @error('password') is-invalid @enderror"
+                        placeholder="Mot de pass" name="password" required autocomplete="current-password">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+                        </div>
+                    </div>
+                </form>
 
 
+            </div>
+
+        </div>
     </div>
-
 </div>
 {{-- <div class="container">
     <div class="row justify-content-center">

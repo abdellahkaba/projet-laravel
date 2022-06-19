@@ -27,8 +27,8 @@
                         <tr>
                             <th style="width: 5% " class="text-center"></th>
                             <th style="width: 25% " class="text-center">Client</th>
-                            <th style="width: 30%" class="text-center">Role</th>
                             <th style="width: 30%" class="text-center">Ajouté</th>
+
                             <th style="width: 20%" class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -43,9 +43,10 @@
                                 @endif
                             </td>
                             <td class="text-center">{{ $client->nom }} {{ $client->prenom }}</td>
-                            <td class="text-center">-----------</td>
+
                             <td class="text-center"><span class="tag tag-success">
                                 {{ $client->created_at->diffForHumans() }}</span></td>
+
                             <td class="text-center">
                                 <button class="btn btn-success" wire:click="gotoEditClient('{{ $client->id }}')">Edit <i class="far fa-edit"></i></button>
                                 <button class="btn btn-danger" wire:click="confirmDelete('{{ $client->id }}')">Delete <i class="far fa-trash-alt"></i></button>

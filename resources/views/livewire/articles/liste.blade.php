@@ -8,8 +8,8 @@
                         <i class="fas fa-user-plus"></i>
                         Ajouter un article
                     </a>
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" wire:model.debounce.100ms="search" class="form-control float-right" placeholder="Search">
+                    <div class="input-group input-group-lg" style="width: 300px;">
+                        <input type="text" name="table_search" wire:model.debounce.100ms="search" class="form-control float-right" placeholder="Rechercher nom article">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-default">
                                 <i class="fas fa-search"></i>
@@ -19,9 +19,9 @@
                 </div>
             </div>
             <div class="card-body table-responsive p-0 table-striped" style="height: 590px">
-                <div class="d-flex justify-content-end p-4 bg-indigo">
-                    <div class="form-group mr-3">
-                        <label for="filtreType">Filtrer par Type</label>
+                <div class="d-flex justify-content-end p-2 bg-indigo">
+                    <div class="form-group">
+                        <label for="filtreType">Filtrer par Type Article</label>
                         <select id="filtreType" wire:model="filtreType" class="form-control">
                             <option value=""></option>
                             @foreach ($typearticles as $typearticle)
@@ -29,70 +29,70 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="filtreEtat">Filtrer par Etat</label>
                         <select id="filtreEtat" wire:model="filtreEtat" class="form-control">
                             <option value=""></option>
                             <option value="1">Disponible</option>
                             <option value="0">Indisponible</option>
                         </select>
-                    </div>
+                    </div> --}}
                 </div>
                <div style="height: 275px">
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th class="text-center">Nom</th>
-                            <th class="text-center">Type</th>
-                            <th class="text-center">Etat</th>
-                            <th class="text-center">Ajouté</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center text-uppercase text-bold text-indigo">Image</th>
+                            <th class="text-center text-uppercase text-bold text-indigo">Nom</th>
+                            <th class="text-center text-uppercase text-bold text-indigo">Type</th>
+                            <th class="text-center text-uppercase text-bold text-indigo">Etat</th>
+                            <th class="text-center text-uppercase text-bold text-indigo">Ajouté</th>
+                            <th class="text-center text-uppercase text-bold text-indigo">Action</th>
 
 
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($articles as $article)
+                        @foreach ($articles as $article)
                             <tr>
                                 <td>
                                     @if($article->imageUrl != "" || $article->imageUrl != null)
                                         <img src="{{ asset($article->imageUrl) }}" alt="" style="width: 60px ; height: 60px;">
                                     @endif
                                 </td>
-                                <td class="text-center">{{ $article->nom }} - {{ $article->noSerie }}</td>
-                                <td class="text-center">{{ $article->type->nom }}</td>
-                                <td class="text-center">
+                                <td class="text-center text-sm text-sm">{{ $article->nom }} - {{ $article->noSerie }}</td>
+                                <td class="text-center text-sm text-sm">{{ $article->type->nom }}</td>
+                                <td class="text-center text-sm text-sm">
                                     @if(count($article->locations)>0)
-
                                         <span class="badge badge-danger">Indisponible</span>
                                     @else
                                         <span class="badge badge-success">Disponible</span>
                                     @endif
                                 </td>
 
-                                <td class="text-center">{{ optional($article->created_at)->diffForHumans() }}</td>
+                                <td class="text-center text-sm text-sm">{{ optional($article->created_at)->diffForHumans() }}</td>
                                 <td class="text-center">
 
-                                    <a title="Tarif {{ $article->nom }}" href="{{ route('admin.gestarticles.articles.tarifs',['articleId' => $article->id]) }}" class="btn btn-link bg-purple">Tarifs <i class="fas fa-money-check"></i>
-                                    </a>
-                                    <a title="Location {{ $article->nom }}" href="{{ route('admin.gestarticles.articles.location',['articleId' => $article->id]) }}" class="btn btn-link bg-gradient-blue">Loué <i class="fas fa-money-check"></i>
-                                    </a>
+                                    {{-- @if(count($article->locations) > 0 )
+                                         <a title="Tarif {{ $article->nom }}" href="{{ route('admin.gestarticles.articles.tarifs',['articleId' => $article->id]) }}" class="btn btn-link bg-purple">Tarifs <i class="fas fa-money-check"></i>
+                                        </a>
+                                    @else
+                                        <a title="Tarif {{ $article->nom }}" href="{{ route('admin.gestarticles.articles.tarifs',['articleId' => $article->id]) }}" class="btn btn-link disabled bg-purple">Tarifs <i class="fas fa-money-check"></i>
+                                        </a>
+                                    @endif --}}
+                                    {{-- <a title="Location {{ $article->nom }}" href="{{ route('admin.gestarticles.articles.location',['articleId' => $article->id]) }}" class="btn btn-link bg-gradient-blue">Louer <i class="fas fa-money-check"></i>
+                                    </a> --}}
+                                    @if(count($article->locations) > 0)
+                                    <button class="btn btn-success" wire:click="editArticle('{{ $article->id }}')" disabled >Modifier <i class="far fa-edit"></i></button>
+                                    @else
                                     <button class="btn btn-success" wire:click="editArticle('{{ $article->id }}')">Modifier <i class="far fa-edit"></i></button>
+                                    @endif
                                     <button class="btn btn-danger" wire:click="confirmDelete('{{ $article->id }}')">Delete <i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="6">
-                                    <div class="alert alert-warning">
-                                        <h3><i class="icon fas fa-ban"></i> Information !</h3>
-                                            Auncune donnée trouvée par rapport à cette Information
-                                    </div>
-                                </td>
-                            </tr>
 
-                        @endforelse
+
+                        @endforeach
                     </tbody>
                 </table>
                </div>

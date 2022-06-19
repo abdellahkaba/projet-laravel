@@ -4,7 +4,7 @@
             <div class="card-header bg-gradient-primary">
                 <h3 class="card-title"> <i class="fas fa-list fa-2x"></i>Tarification-{{ $article->nom }}</h3>
                 <div class="card-tools align-items-center d-flex">
-                    <a href="{{ route('admin.gestarticles.articles') }}" class="btn btn-link text-white mr-4 d-block bg-red" style="border-color: #0062cc ">
+                    <a href="{{ route('employe.locations.locations.encour') }}" class="btn btn-link text-white mr-4 d-block bg-red" style="border-color: #0062cc ">
                         <i class="fas fa-long-arrow-alt-left"></i>
                         Retour à la liste d'articles
                     </a>
@@ -19,15 +19,16 @@
                     <div class="p-4">
                         <div>
                             <div class="form-group">
+                                <label for=""><span class="text-indigo">Choisir une durée de Location</span></label>
                                 <select
                                     wire:model="newTarif.duree_location_id"
-                                    class="form-control
+                                    class="form-control text-indigo
                                         @error('newTarif.duree_location_id')
                                             is-invalid
                                         @enderror">
-                                    <option value="selected">Choisir une durée de Location</option>
+                                    <option value="selected"></option>
                                     @foreach ($dureeLocations as $duree)
-                                        <option value="{{ $duree->id }}">{{ $duree->libelle }}</option>
+                                        <option class="text-bold" value="{{ $duree->id }}">{{ $duree->libelle }}</option>
                                     @endforeach
                                 </select>
                                 @error('newTarif.duree_location_id')
@@ -35,7 +36,8 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <input type="number" wire:model="newTarif.prix" class="form-control
+                                <label for=""><span class="text-indigo">Montant de la Tarification</span></label>
+                                <input type="number" wire:model="newTarif.prix" class="form-control text-indigo
                                      @error('newTarif.prix')
                                         is-invalid
                                     @enderror">
@@ -50,24 +52,24 @@
                             <button class="btn btn-link bg-danger" wire:click.prevent="cancelTarif"><i class="far fa-trash-alt" ></i>Cancel
                             </button>
                         </div>
-                    </div> 
+                    </div>
                 @endif
                <div style="height: 300px">
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
                         <tr>
-                            <th class="text-center">N°</th>
-                            <th class="text-center">Durée Location</th>
-                            <th class="text-center">Prix</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center text-indigo text-uppercase">N°</th>
+                            <th class="text-center text-indigo text-uppercase">Durée Location</th>
+                            <th class="text-center text-indigo text-uppercase">Prix</th>
+                            <th class="text-center text-indigo text-uppercase">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($tarifs as $tarif)
                             <tr>
-                                <td class="text-center">{{ ++$loop->index }}</td>
-                                <td class="text-center">{{ $tarif->dureeLocation->libelle }}</td>
-                                <td class="text-center">{{ $tarif->prixForHumans}}</td>
+                                <td class="text-center  text-uppercase">{{ ++$loop->index }}</td>
+                                <td class="text-center  text-uppercase">{{ $tarif->dureeLocation->libelle }}</td>
+                                <td class="text-center  text-uppercase">{{ $tarif->prixForHumans}}</td>
                                 <td class="text-center">
                                     <button class="btn btn-success" wire:click="editTarif({{ $tarif->id }})">Modifier <i class="far fa-edit"></i></button>
                                 </td>

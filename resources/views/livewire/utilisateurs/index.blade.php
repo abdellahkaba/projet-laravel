@@ -8,9 +8,13 @@
     @if($currentPage == PAGELISTE)
         @include("livewire.utilisateurs.liste")
     @endif
+    @if($currentPage == PAGEROLE)
+        @include("livewire.utilisateurs.role")
+    @endif
 </div>
 
 <script>
+
 
     window.addEventListener("showSuccessMessage", event =>{
          Swal.fire({
@@ -21,6 +25,7 @@
             timer: 4000
         })
     })
+
 
 
         window.addEventListener("showConfirmMessage", event=>{
@@ -39,11 +44,23 @@
                        @this.deleteUser(event.detail.message.data.user_id)
                     }
 
-                    @this.resetPassword()
+                    // @this.resetPassword()
 
                 }
            })
         })
+</script>
+
+<script>
+    window.addEventListener("showDangerMessage", event =>{
+         Swal.fire({
+            position: 'top-end',
+            icon: 'danger',
+            title: event.detail.message || "Operation effectuée avec succès.",
+            showConfirmButton: false,
+            timer: 4000
+        })
+    })
 </script>
 
 

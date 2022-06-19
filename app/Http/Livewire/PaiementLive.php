@@ -114,10 +114,11 @@ class PaiementLive extends Component
         }
 
         public function deletePaiement(Paiement $paiement){
+                
                 $paiement->delete() ;
         }
 
-            
+
 }
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Carbon\Carbon;
 use App\Models\Article;
 use Livewire\Component;
+use App\Models\Location;
 use App\Models\TypeArticle;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
@@ -29,6 +30,7 @@ class ArticleLive extends Component
     public $editArticle = [] ; //fonction d'edition d'article
     public $editChanged = false ;
     public $editArticleValue = [] ;
+    public Article $article ;
     //les variables de pagination
     public $ArticlePage = ARTICLELISTE;
 
@@ -69,7 +71,8 @@ class ArticleLive extends Component
         }
         return view('livewire.articles.index' , [
             "articles" => $articleQuery->latest()->paginate(5),
-            "typearticles" => TypeArticle::orderBy("nom","ASC")->get()
+            "typearticles" => TypeArticle::orderBy("nom","ASC")->get(),
+            'locations' => Location::all()
         ])
             ->extends('layouts.master')
             ->section('content');

@@ -7,11 +7,12 @@ use Illuminate\Support\Str;
     define("PAGEEDITFORM","edit");
     define("PAGELISTE","liste");
     define("DEFAULTPASSWORD","password") ;
+    define("PAGEROLE","role");
 
     //Les constantes pour ProprietesArticles
     define("PROPRIETEINDEX" , "index");
     define("PROPRIETEPAGE","propriete");
-    
+
     //Les Constantes pour Article
     define("ARTICLECREATE","create");
     define("ARTICLEEDIT","edit") ;

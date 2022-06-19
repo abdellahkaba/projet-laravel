@@ -4,7 +4,7 @@
             <div class="card-header bg-gradient-primary">
                 <h3 class="card-title"> <i class="fas fa-list fa-2x"></i>Paiement de Location</h3>
                 <div class="card-tools align-items-center d-flex">
-                    <a href="{{ route('admin.gestarticles.articles') }}" class="btn btn-link text-white mr-4 d-block bg-red" style="border-color: #0062cc ">
+                    <a href="{{ route('employe.locations.locations.create') }}" class="btn btn-link text-white mr-4 d-block bg-red" style="border-color: #0062cc ">
                         <i class="fas fa-long-arrow-alt-left"></i>
                         Retour à la liste
                     </a>
@@ -22,7 +22,7 @@
                     <div class="p-4">
                         <div>
                             <div class="form-group">
-                                <label for="">Montant</label>
+                                <label for=""><span class="text-indigo">Montant</span></label>
                                 <input type="number" wire:model="newPaiement.montant" class="form-control
                                     @error('newPaiement.montant')
                                         is-invalid
@@ -32,7 +32,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">Date de Paiment</label>
+                                <label for=""><span class="text-indigo">Date de Paiment</span></label>
                                 <input type="date" wire:model="newPaiement.datePaiement" class="form-control
                                 @error('newPaiement.datePaiement')
                                 is-invalid
@@ -43,15 +43,16 @@
 
                             </div>
                             <div class="form-group">
+                                <label for=""><span class="text-indigo">Veuillez choisir votre nom</span></label>
                                 <select
                                     wire:model="newPaiement.user_id"
-                                    class="form-control
+                                    class="form-control text-uppercase text-bold
                                         @error('newPaiement.user_id')
                                             is-invalid
                                         @enderror">
-                                    <option value="selected">Choisir Utilisateur</option>
+                                    <option value="selected"></option>
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->id }}">Identifent-{{ $user->id }} : {{ $user->nom }}</option>
+                                        <option class="text-indigo" value="{{ $user->id }}">{{ $user->prenom }} {{ $user->nom }}</option>
                                     @endforeach
                                 </select>
                                 @error('newPaiement.user_id')
@@ -76,9 +77,9 @@
                             </div> --}}
                         </div>
                         <div>
-                            <button class="btn btn-link bg-success" wire:click.prevent="savePaiement"><i class="fa fa-check"></i>Valider
+                            <button class="btn btn-link bg-success text-uppercase text-bold" wire:click.prevent="savePaiement"><i class="fa fa-check"></i>Valider
                             </button>
-                            <button class="btn btn-link bg-danger" wire:click.prevent="cancelPaiement"><i class="far fa-trash-alt" ></i>Cancel
+                            <button class="btn btn-link bg-danger text-uppercase text-bold" wire:click.prevent="cancelPaiement"><i class="far fa-trash-alt" ></i>Cancel
                             </button>
                         </div>
                     </div>
@@ -87,23 +88,26 @@
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
                         <tr>
-                            <th class="text-center">N°</th>
-                            <th class="text-center">Date de Paiement</th>
-                            <th class="text-center">Montant</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center text-uppercase text-bold text-indigo">N°</th>
+                            <th class="text-center text-uppercase text-bold text-indigo">Date de Paiement</th>
+                            <th class="text-center text-uppercase text-bold text-indigo">Montant</th>
+                            <th class="text-center text-uppercase text-bold text-indigo">Effectué par</th>
+                            <th class="text-center text-uppercase text-bold text-indigo">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($paiements as $paiement)
                             <tr>
-                                <td class="text-center">{{ ++$loop->index }}</td>
-                                <td class="text-center">{{ $paiement->datePaiement }}</td>
-                                <td class="text-center">{{ $paiement->montantForHumans}}</td>
-                                <td class="text-center">
-                                    <button class="btn btn-success" wire:click="editPaiement({{ $paiement->id }})">Modifier <i class="far fa-edit"></i>
+                                <td class="text-center text-center text-uppercase text-bold text-indigo">{{ ++$loop->index }}</td>
+                                <td class="text-center text-center text-uppercase text-bold text-indigo">{{ $paiement->datePaiement }}</td>
+                                <td class="text-center text-center text-uppercase text-bold text-indigo">{{ $paiement->montantForHumans}}</td>
+                                <td class="text-center text-center text-uppercase text-bold text-indigo">{{ $paiement->user->nom}} {{ $paiement->user->prenom }}</td>
+                                <td class="text-center text-center text-uppercase text-bold text-indigo">
+
+                                    <button class="btn btn-success text-uppercase text-bold" wire:click="editPaiement({{ $paiement->id }})"><i class="far fa-edit"></i> Modifier
                                     </button>
-                                    
-                                    <button class="btn btn-danger" wire:click="confirmDelete('{{ $paiement->id }}')"><i class="far fa-trash-alt"></i>Supprimer</button>
+
+                                    <button class="btn btn-danger text-uppercase text-bold" wire:click="confirmDelete('{{ $paiement->id }}')"><i class="far fa-trash-alt"></i> Supprimer</button>
                                 </td>
                             </tr>
                         @empty

@@ -9,7 +9,8 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         @livewireStyles
     </head>
-    <body class="hold-transition sidebar-max">
+    <style></style>
+    <body class="hold-transition sidebar-max" style="">
         <div class="wrapper">
            <x-forms.menu />
            <x-forms.dashboard />
