@@ -20,17 +20,17 @@
 
                         <div class=" my-4 p-3 flex-grow-1 bg-light">
                             <div class="form-group">
-                                <label for="">Nom</label>
-                                <input type="text" class="form-control" wire:model="editArticle.nom">
+                                <label for="" text-indigo >Nom</label>
+                                <input type="text" class="form-control text-indigo text-bold" wire:model="editArticle.nom">
                             </div>
                             <div class="form-group">
-                                <label for="">Numero de Série</label>
-                                <input type="text" class="form-control" wire:model="editArticle.noSerie">
+                                <label for="" text-indigo >Numero de Série</label>
+                                <input type="text" class="form-control text-indigo text-bold" wire:model="editArticle.noSerie">
                             </div>
                             <div class="form-group">
-                                <label for="">Type</label>
-                                <select class="form-control" wire:model="editArticle.type_article_id">
-                                    <option value="{{ $editArticle["type_article_id"] }}">{{     $editArticle["type"]["nom"] }}
+                                <label for="" text-indigo >Type</label>
+                                <select class="form-control text-indigo text-bold" wire:model="editArticle.type_article_id">
+                                    <option value="{{ $editArticle["type_article_id"] }}">{{ $editArticle["type"]["nom"] }}
                                     </option>
 
                                 </select>
@@ -41,10 +41,10 @@
                                 <div class="my-3 bg-gray-info p-3">
                                     @foreach ($editArticle["article_proprietes"] as $index => $articlePropriete)
                                         <div class="form-group">
-                                            <label for="">
+                                            <label for="" text-indigo >
                                                 {{ $articlePropriete["propriete"]["nom"] }} @if(!$articlePropriete["propriete"]["estObligatoire"])(Optionel) @endif
                                             </label>
-                                            <input type="text" class="form-control" wire:model="editArticle.article_proprietes.{{ $index }}.valeur">
+                                            <input type="text" class="form-control text-indigo text-bold" wire:model="editArticle.article_proprietes.{{ $index }}.valeur">
                                         </div>
                                     @endforeach
                                 </div>

@@ -9,12 +9,13 @@ use App\Models\Paiement;
 use App\Models\StatutLocation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 
 class Location extends Model
 {
-    use HasFactory;
+    use HasFactory,Notifiable;
 
-    protected $fillable = ["article_id", "dateDebut","dateFin","client_id","user_id","statut_location_id","created_at","updated_at"] ;
+    protected $fillable = ["article_id", "dateDebut","dateFin","client_id","user_id","statut_location_id","prix","created_at","updated_at"] ;
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -31,5 +32,7 @@ class Location extends Model
     public function article(){
         return $this->belongsTo(Article::class);
     }
-   
+    public function getPrixForHumansAttribute(){
+        return number_format($this->prix , 0 , ',',' '). ' ' . env("CURRENCY","FG") ;
+    }
 }

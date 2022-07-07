@@ -1,5 +1,5 @@
 <div class="row p-4 pt-5">
-    <div class="card card-primary">
+    <div class="card card-primary col-8">
         <div class="card-header">
             <h3 class="card-title"> <i class="fas fa-user-plus fa-2x"></i> Formulaire d'ajout client</h3>
         </div>
@@ -8,19 +8,8 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="">Nom</label>
-                            <input type="name" wire:model="addClient.nom" class="form-control @error('addClient.nom')
-                               is-invalid
-                            @enderror">
-                            @error('addClient.nom')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="">Prenom</label>
-                            <input type="name" wire:model="addClient.prenom" class="form-control @error('addClient.prenom')
+                            <label for=""><span class="text-indigo">Prenom</label>
+                            <input type="name" wire:model="addClient.prenom" class="form-control text-indigo text-bold @error('addClient.prenom')
                                 is-invalid
                             @enderror" >
                             @error('addClient.prenom')
@@ -28,10 +17,21 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for=""><span class="text-indigo">Nom</label>
+                            <input type="name" wire:model="addClient.nom" class="form-control text-indigo text-bold @error('addClient.nom')
+                               is-invalid
+                            @enderror">
+                            @error('addClient.nom')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="">Sexe</label>
-                    <select name="" id=""wire:model="addClient.sexe" class="form-control @error('addClient.sexe')
+                    <label for=""><span class="text-indigo">Sexe</label>
+                    <select name="" id=""wire:model="addClient.sexe" class="form-control text-indigo text-bold @error('addClient.sexe')
                         is-invalid
                     @enderror" >
                         <option value="">--------------</option>
@@ -45,8 +45,8 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="">Date de Naissance</label>
-                            <input type="date" wire:model="addClient.dateNaiss" class="form-control @error('addClient.dateNaiss')
+                            <label for=""><span class="text-indigo">Date de Naissance</label>
+                            <input type="date" wire:model="addClient.dateNaiss" class="form-control text-indigo text-bold @error('addClient.dateNaiss')
                                 is-invalid
                             @enderror" >
                             @error('addClient.dateNaiss')
@@ -56,8 +56,8 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="">Lieu de Naissance</label>
-                            <input type="text" wire:model="addClient.lieuNaiss" class="form-control @error('addClient.lieuNaiss')
+                            <label for=""><span class="text-indigo">Lieu de Naissance</label>
+                            <input type="text" wire:model="addClient.lieuNaiss" class="form-control text-indigo text-bold @error('addClient.lieuNaiss')
                                 is-invalid
                             @enderror" >
                             @error('addClient.lieuNaiss')
@@ -66,23 +66,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="">Ville</label>
-                    <input type="name" class="form-control
-                    @error('addClient.ville')
-                    is-invalid
-                    @enderror"
-                    wire:model="addClient.ville">
-
-                    @error('addClient.ville')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="">Adresse</label>
-                            <input type="text" wire:model="addClient.adresse" class="form-control @error('addClient.adresse')
+                            <label for=""><span class="text-indigo">Adresse</label>
+                            <input type="text" wire:model="addClient.adresse" class="form-control text-indigo text-bold @error('addClient.adresse')
                                 is-invalid
                             @enderror" >
                             @error('addClient.adresse')
@@ -92,8 +80,8 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="">Telephone</label>
-                            <input type="name" wire:model="addClient.telephone" class="form-control @error('addClient.telephone')
+                            <label for=""><span class="text-indigo">Telephone</label>
+                            <input type="name" wire:model="addClient.telephone" class="form-control text-indigo text-bold @error('addClient.telephone')
                                 is-invalid
                             @enderror" >
                             @error('addClient.telephone')

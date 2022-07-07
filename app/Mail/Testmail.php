@@ -11,14 +11,20 @@ class Testmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $nom;
+    protected $email;
+    protected $message;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($nom,$email,$message)
     {
-        //
+        $this->nom = $nom;
+        $this->email = $email;
+        $this->message = $message;
     }
 
     /**
@@ -28,7 +34,8 @@ class Testmail extends Mailable
      */
     public function build()
     {
-        return $this->from("abdallahkaba98@gmail.com")
-        ->view('emails.test')->extends("layouts.master")->section("content");
+
+        return $this->from($this->email)
+        ->view('livewire.emails.create')->extends("layouts.master")->section("content");
     }
 }

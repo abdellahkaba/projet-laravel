@@ -18,10 +18,10 @@
                             </div>
                         </form>
                      </div>
-                </div> 
                 </div>
-                
-                 
+                </div>
+
+
             </div>
             <div class="card-body table-responsive p-0 table-striped" style="height: 590px">
                <div style="height: 275px">
@@ -33,6 +33,7 @@
                             <th class="text-center text-uppercase text-bold text-indigo">Date debut</th>
                             <th class="text-center text-uppercase text-bold text-indigo">Date fin</th>
                             <th class="text-center text-uppercase text-bold text-indigo">Client</th>
+                            <th class="text-center text-uppercase text-bold text-indigo">Prix</th>
                             <th class="text-center text-uppercase text-bold text-indigo">Action</th>
 
 
@@ -53,18 +54,16 @@
                                 </td>
 
                                 <td class="text-center text-sm">{{ $location->client->prenom }}  {{ $location->client->nom }}</td>
-                                
-                                        
+                                <td class="text-center text-sm">
+                                    {{ $location->prix_for_humans}}
+                                </td>
+
                                 <td class="text-center text-sm">
 
                                     @if($searchDate > $location->dateFin)
-                                        
-                                        <a title="Tarif {{ $location->article->nom }}" href="{{ route('employe.locations.articles.tarifs',['articleId' => $location->article->id]) }}" class="btn btn-link bg-purple">Tarifs <i class="fas fa-money-check"></i>
-                                        </a>
-                                       
+                                        <button class="btn btn-success">Penaliter</button>
                                     @else
-                                    <a title="Tarif " href="#" class="btn btn-link disabled bg-purple">Tarifs <i class="fas fa-money-check"></i>
-                                    </a>
+                                        <button class="btn btn-success" disabled="disabled">Penaliter</button>
                                     @endif
                                     {{-- @if(count($location->locations) > 0 )
                                         <a title="Tarif {{ $location->nom }}" href="{{ route('admin.gestlocations.locations.tarifs',['locationId' => $location->id]) }}" class="btn btn-link bg-purple">Tarifs <i class="fas fa-money-check"></i>
@@ -74,7 +73,7 @@
                                         </a>
                                     @endif --}}
                                     {{-- <a title="Location {{ $location->nom }}" href="{{ route('employe.locations.locations.location',['locationId' => $location->id]) }}" class="btn btn-link bg-gradient-blue">Louer <i class="fas fa-money-check"></i> --}}
-                                    </a>
+                                    {{-- </a> --}}
                                     {{-- @foreach ($locations as $location)
                                       @if($location->dateFin > "2022-06-05 00:00:00")
                                     <button class="btn btn-danger" wire:click="confirmDelete('{{ $location->id }}')">Delete <i class="far fa-trash-alt"></i></button>

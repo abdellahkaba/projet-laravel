@@ -6,13 +6,13 @@
 
                 <div class="card-tools align-items-center d-flex">
                     <h1>
-                        <a href="" class="btn btn-link text-white mr-4 d-block" style="background-color: #622452" wire:click.prevent="gotoaddClient()">
+                        <a href="" class="btn btn-link text-white mr-4 d-block lg" style="background-color: green" wire:click.prevent="gotoaddClient()">
                             <i class="fas fa-user-plus"></i>
-                            Nouveau client
+                            Nouvel client
                         </a>
                     </h1>
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" wire:model.debounce.100ms="search" placeholder="Search">
+                    <div class="input-group input-group-lg" style="width: 300px;">
+                        <input type="text" name="table_search" class="form-control float-right" wire:model.debounce.100ms="search" placeholder="rechecher par nom">
                         <div class="input-group-append" wire:model.debounce.100ms="search">
                             <button type="submit" class="btn btn-default">
                                 <i class="fas fa-search"></i>
@@ -26,10 +26,12 @@
                     <thead>
                         <tr>
                             <th style="width: 5% " class="text-center"></th>
-                            <th style="width: 25% " class="text-center">Client</th>
-                            <th style="width: 30%" class="text-center">Ajouté</th>
+                            <th style="" class="text-center text-uppercase text-bold text-indigo">Client</th>
+                            <th style="" class="text-center text-uppercase text-bold text-indigo">Adresse</th>
+                            <th style="" class="text-center text-uppercase text-bold text-indigo">Telephone</th>
+                            <th style="" class="text-center text-uppercase text-bold text-indigo">Enregisté</th>
 
-                            <th style="width: 20%" class="text-center">Action</th>
+                            <th style="width: 20%" class="text-center text-uppercase text-bold text-indigo">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,10 +44,14 @@
                                     <img src="{{ asset('images/bussiness-man.png') }}" width="25" />
                                 @endif
                             </td>
-                            <td class="text-center">{{ $client->nom }} {{ $client->prenom }}</td>
+                            <td class="text-center">{{ $client->prenom }} {{ $client->nom }}</td>
+
+                            <td class="text-center">{{ $client->adresse }}</td>
+                            <td class="text-center">{{ $client->telephone }}</td>
 
                             <td class="text-center"><span class="tag tag-success">
-                                {{ $client->created_at->diffForHumans() }}</span></td>
+                                {{ $client->created_at->diffForHumans() }}</span>
+                            </td>
 
                             <td class="text-center">
                                 <button class="btn btn-success" wire:click="gotoEditClient('{{ $client->id }}')">Edit <i class="far fa-edit"></i></button>

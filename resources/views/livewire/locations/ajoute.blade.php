@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for=""><span class="text-indigo">Veuillez selectionner votre nom en tant que Employé</span></label>
+                            <label for=""><span class="text-indigo">Veuillez selectionner ce Nom <i class="badge badge-info">{{ auth()->user()->prenom }} {{ auth()->user()->nom }}</i></span></label>
                             <select wire:model="addLocation.user" class="form-control @error('addLocation.user_id')
                             is-invalid
                             @enderror">
@@ -97,10 +97,21 @@
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for=""><span class="text-indigo">Prix</span></label>
+                            <input type="text" wire:model="addLocation.prix" class="form-control @error('addLocation.prix')
+                                is-invalid
+                            @enderror">
+                            @error('addLocation.prix')
+                            <span class="text-danger">{{ $message }}</span>
+                           @enderror
+                        </div>
                     </div>
                 </div>
             </div>
-
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Ajouté</button>
                 <button type="submit" wire:click.prevent="gotoListLocation()" class="btn btn-danger">Retour à la Liste des Locations</button>

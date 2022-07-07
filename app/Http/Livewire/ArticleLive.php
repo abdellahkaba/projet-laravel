@@ -44,7 +44,7 @@ class ArticleLive extends Component
                 'editArticle.article_proprietes.*.valeur' => 'required'
 
             ] ;
-        }
+        } 
 
         //return $this->addArticle();
     }
@@ -166,7 +166,7 @@ class ArticleLive extends Component
         $this->proprieteArticles = [] ;
         $validatedData = [] ;
         $this->addArticle = [];
-        $this->addPhoto = [] ;
+        $this->addPhoto = "" ;
         $this->ArticlePage  = ARTICLELISTE ;
        // $this->customerErrorMessage = [] ;
     }
@@ -272,7 +272,7 @@ class ArticleLive extends Component
             $image->save() ;
 
             //suppression de l'ancienne image par la nouvelle
-            Storage::disk("local")->delete(str_replace("storage/","public" , $article->imageUrl()));
+            Storage::disk("local")->delete(str_replace("storage/","public" , $article->imageUrl));
 
             $article->imageUrl = $imagePath ;
         }

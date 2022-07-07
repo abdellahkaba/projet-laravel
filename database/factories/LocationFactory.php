@@ -24,6 +24,7 @@ class LocationFactory extends Factory
             "user_id" => rand(1,4),
             "statut_location_id" => rand(1,3),
 
+
         ];
     }
 }

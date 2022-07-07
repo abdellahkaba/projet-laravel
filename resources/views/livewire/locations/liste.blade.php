@@ -98,18 +98,29 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for=""><span class="text-indigo">Veuillez selectionner votre nom pour l'enregistrer</span></label>
+                                    <label for=""><span class="text-indigo">Veuillez selectionner ce nom <i class="badge badge-info">{{ auth()->user()->prenom }} {{ auth()->user()->nom }}</i></span></label>
                                     <select wire:model="newLocation.user" class="form-control @error('newLocation.user_id')
                                     is-invalid
                                 @enderror">
                                         <option value=""></option>
                                         @foreach ($users as $user)
-                                            <option class="text-blue" value = "{{ $user->id }} "> {{ $user->nom }} {{ $user->prenom }} </option>
+                                            <option class="text-blue" value = "{{ $user->id }} "> {{ $user->prenom }} {{ $user->nom }} </option>
                                         @endforeach
                                     </select>
                                     @error('newLocation.user_id')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for=""><span class="text-indigo">Prix</span></label>
+                                    <input type="number" wire:model="newLocation.prix" class="form-control @error('newLocation.prix')
+                                        is-invalid
+                                    @enderror">
+                                    @error('newLocation.prix')
+                                    <span class="text-danger">{{ $message }}</span>
+                                   @enderror
                                 </div>
                             </div>
                         </div>
@@ -142,8 +153,10 @@
                                     <td class="text-center">{{ $location->client->nom }}-{{ $location->client->prenom }}</td>
                                     {{-- <td class="text-center">{{ $location->dateDebut }}</td>
                                     <td class="text-center">{{ $location->dateFin }}</td> --}}
-                                    <td class="text-center">{{ $location->statuts->nom }}</td>
-                                    <td class="text-center">{{ $location->created_at->diffForHumans() }}</td>
+                                    <td class="text-center">
+                                        <span><i class="badge badge-info">{{ $location->statuts->nom }}</i></span>
+                                    </td>
+                                    <td class="text-center">{{  $location->created_at->diffForHumans() }}</td>
                                     <td class="text-center">{{ $location->user->nom }}-{{ $location->user->prenom }}</td>
                                     <td class="text-center">
                                         <a title="Paiement" href="
@@ -151,8 +164,13 @@
                                         " class="btn btn-link bg-purple">Payer <i class="fas fa-money-check"></i>
                                         </a>
                                         {{-- {{ route('admin.gestarticles.articles') }} --}}
-                                        <button class="btn btn-success" wire:click="editLocation({{ $location->id }})">Modifier <i class="far fa-edit"></i>
+                                        @if ($location->statuts->nom != "En cours")
+                                        <button class="btn btn-success" disabled wire:click="editLocation({{ $location->id }})">Modification <i class="far fa-edit"></i>
                                         </button>
+                                        @else
+                                        <button class="btn btn-success" wire:click="editLocation({{ $location->id }})">Modification <i class="far fa-edit"></i>
+                                        </button>
+                                        @endif
                                         @if ($location->statuts->nom == "En cours")
                                             <button class="btn btn-danger" disabled wire:click="confirmDelete('{{ $location->id }}')">Delete <i class="far fa-trash-alt"></i></button>
                                         @else

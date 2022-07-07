@@ -43,8 +43,8 @@
                                     <img src="{{ asset('images/bussiness-man.png') }}"width="25" />
                                 @endif
                             </td>
-                            <td class="text-center text-uppercase text-sm">{{ $user->nom }} {{ $user->prenom }}</td>
-                            <td class="text-center text-uppercase text-sm text-blue">{{ $user->all_role_names }}</td>
+                            <td class="text-center text-uppercase text-sm">{{ $user->prenom }} {{ $user->nom }}</td>
+                            <td class="text-center text-uppercase text-sm text-blue"><span><i class="badge badge-info">{{ $user->all_role_names }}</i></span></td>
                             <td class="text-center text-uppercase text-sm"><span class="tag tag-success">
                                 {{ $user->created_at->diffForHumans() }}</span></td>
                             <td class="text-center">

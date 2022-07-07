@@ -4,7 +4,7 @@
             <div class="card-header bg-gradient-primary">
                 <h3 class="card-title"> <i class="fas fa-list fa-2x"></i> Liste des Articles</h3>
                 <div class="card-tools align-items-center d-flex">
-                    <a href="" class="btn btn-link text-white mr-4 d-block" style="background-color: #006 ; border-color: #0062cc " wire:click.prevent="gotoaddArticle()">
+                    <a href="" class="btn btn-link text-white mr-4 d-block" style="background-color: green ; border-color: #0062cc " wire:click.prevent="gotoaddArticle()">
                         <i class="fas fa-user-plus"></i>
                         Ajouter un article
                     </a>

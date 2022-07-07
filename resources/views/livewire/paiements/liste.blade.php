@@ -12,20 +12,22 @@
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
                         <tr>
-                            <th class="text-center text-uppercase text-bold text-indigo">N°</th>
-                            <th class="text-center text-uppercase text-bold text-indigo">Date de Paiement</th>
-                            <th class="text-center text-uppercase text-bold text-indigo">Montant</th>
-                            <th class="text-center text-uppercase text-bold text-indigo">Effectué par</th>
-                            <th class="text-center text-uppercase text-bold text-indigo">Action</th>
+                            <th class="text-center">N°</th>
+                            {{-- <th class="text-center text-bold text-indigo">Article</th> --}}
+                            <th class="text-center">Date de Paiement</th>
+                            <th class="text-center">Montant</th>
+                            <th class="text-center">Effectué par</th>
+                            {{-- <th class="text-center text-uppercase text-bold text-indigo">Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($paiements as $paiement)
                             <tr>
-                                <td class="text-center text-center text-uppercase text-bold text-indigo">{{ ++$loop->index }}</td>
-                                <td class="text-center text-center text-uppercase text-bold text-indigo">{{ $paiement->datePaiement }}</td>
-                                <td class="text-center text-center text-uppercase text-bold text-indigo">{{ $paiement->montantForHumans}}</td>
-                                <td class="text-center text-center text-uppercase text-bold text-indigo">{{ $paiement->user->nom}} {{ $paiement->user->prenom }}</td>
+                                <td class="text-center text-center">{{ ++$loop->index }}</td>
+                                {{-- <td class="text-center text-center"><a href="{{ route('employe.paiements.paiements.article',['articleId' => $paiement->id]) }}">{{ $paiement->location_id-> }}</a></td> --}}
+                                <td class="text-center">{{ $paiement->datePaiement }}</td>
+                                <td class="text-center">{{ $paiement->montantForHumans}}</td>
+                                <td class="text-center"> {{ $paiement->user->prenom }} {{ $paiement->user->nom}}</td>
                             </tr>
                         @endforeach
 

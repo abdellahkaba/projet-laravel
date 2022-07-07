@@ -20,9 +20,6 @@ class ClientFactory extends Factory
             "nom" => $this->faker->lastName,
             "prenom" => $this->faker->firstName,
             "sexe" => array_rand(['F','H'] , 1),
-            "dateNaiss" => $this->faker->dateTimeBetween("1980-01-01","2002-11-11"),
-            "lieuNaiss" => $this->faker->city,
-            "ville" => $this->faker->city,
             "adresse" => $this->faker->address,
             "telephone" => $this->faker->phoneNumber,
 

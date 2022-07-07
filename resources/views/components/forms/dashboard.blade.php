@@ -5,7 +5,6 @@
     </a> --}}
 
     <div class="sidebar">
-
         {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
                 <img src="" class="img-circle elevation-2" alt="User Image">
@@ -15,120 +14,62 @@
             </div>
         </div> --}}
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column"       data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-link">
-                    {{-- {{ route('home') }} --}}
-                    <a href="{{ route('admin.gestarticles.emails.create') }}">
+                    <a href="{{ route('home') }}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>Acceuil</p>
                     </a>
-
                 </li>
-                @can('manager')
-                <li class="nav-item menu-open">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Tableau de bord
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    {{-- <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link active">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Vue global</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>locations</p>
-                            </a>
-                        </li>
-                    </ul> --}}
-                </li>
-                @endcan
-
                 @can('superadmin')
-                <li class="nav-item {{ setMenuOpenClass('superadmin.habilitations.' , 'menu-open') }}">
-                    <a href="#" class="nav-link {{ setMenuOpenClass('superadmin.habilitations.' , 'active') }}">
-                        <i class="fas fa-user-shield"></i>
-                        <p>
-                            Gestion des Employés
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('superdamin.habilitations.users.index') }}" class="nav-link {{ setMenuActive('superadmin.habilitation.users.index') }} ">
-                                <i class="fas fa-users-cog"></i>
-                                <p>Utilisateur</p>
-                            </a>
-                        </li>
-                        {{-- <li class="nav-item">
-                            <a href="{{ route('superdamin.habilitations.mails.store') }}" class="nav-link {{ setMenuActive('superadmin.habilitation.users.index') }} ">
-                                <i class="fas fa-users-cog"></i>
-                                <p>Notification</p>
-                            </a>
-                        </li> --}}
-                    </ul>
-                </li>
-
+                    <li class="nav-item {{ setMenuOpenClass('superadmin.habilitations.' , 'menu-open') }}">
+                        <a href="#" class="nav-link {{ setMenuOpenClass('superadmin.habilitations.' , 'active') }}">
+                            <i class="fas fa-user-shield"></i>
+                            <p>
+                                Gestion des Employés
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                         <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('superadmin.habilitations.users.index') }}" class="nav-link {{ setMenuActive('superadmin.habilitation.users.index') }} ">
+                                    <i class="fas fa-users-cog"></i>
+                                    <p>Utilisateur</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 @endcan
                 @can('admin')
-                <li class="nav-item {{ setMenuOpenClass('admin.gestarticles.' , 'menu-open') }}" >
-                    <a href="#" class="nav-link {{ setMenuOpenClass('admin.gestarticles.' , 'active') }}">
-                        <i class="nav-icon far fa-circle "></i>
-                        <p>
-                            Gestion des articles
+                    <li class="nav-item {{ setMenuOpenClass('admin.gestarticles.' , 'menu-open') }}" >
+                        <a href="#" class="nav-link {{ setMenuOpenClass('admin.gestarticles.' , 'active') }}">
+                            <i class="nav-icon far fa-circle "></i>
+                            <p>
+                                Gestion des articles
                             <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.gestarticles.types') }}" class="nav-link {{ setMenuActive('admin.habilitation.types') }}">
-                                <i class="nav-icon fas fa-list-ul"></i>
-                                <p>Type d'articles</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.gestarticles.articles') }}" class="nav-link {{ setMenuActive('admin.habilitation.articles') }} ">
-                                <i class="nav-icon fas fa-list-ul"></i>
-                                <p>Articles</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                {{-- <li class="nav-item {{ setMenuOpenClass('admin.gestmateriels.' , 'menu-open') }}" >
-                    <a href="#" class="nav-link {{ setMenuOpenClass('admin.gestmateriels.' , 'active') }}">
-                        <i class="nav-icon far fa-circle "></i>
-                        <p>
-                            Matériels Agricoles
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.gestmateriels.categories') }}" class="nav-link {{ setMenuActive('admin.habilitation.categories') }}">
-                                <i class="nav-icon fas fa-list-ul"></i>
-                                <p>Les catégories</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.gestmateriels.materiels') }}" class="nav-link {{ setMenuActive('admin.habilitation.materiels') }} ">
-                                <i class="nav-icon fas fa-list-ul"></i>
-                                <p>Matériels</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-sliders-h"></i>
-                                <p>Vente</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li> --}}
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.gestarticles.types') }}" class="nav-link {{ setMenuActive('admin.habilitation.types') }}">
+                                    <i class="nav-icon fas fa-list-ul"></i>
+                                    <p>Type d'articles</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.gestarticles.articles') }}" class="nav-link {{ setMenuActive('admin.habilitation.articles') }} ">
+                                    <i class="nav-icon fas fa-list-ul"></i>
+                                    <p>Articles</p>
+                                </a>
+                            </li>
+                            {{-- <li class="nav-item">
+                                <a href="{{  }}" class="nav-link {{ setMenuActive('admin.habilitation.articles') }} ">
+                                    <i class="nav-icon fas fa-list-ul"></i>
+                                    <p>Email</p>
+                                </a>
+                            </li> --}}
+                        </ul>
+                    </li>
                 @endcan
                 @can('employe')
                     <li class="nav-item {{ setMenuOpenClass('employe.locations.' , 'menu-open') }}">
@@ -152,12 +93,12 @@
                                     <p>Liste des Locations</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('employe.locations.articles.tarification') }}" class="nav-link">
                                     <i class="nav-icon fas fa-sliders-h"></i>
                                     <p>Tarification</p>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -167,20 +108,18 @@
                         </a>
                     </li>
                 @endcan
-                @can('admin')
-                <li class="nav-header">Caisse</li>
-                <li class="nav-item">
-                    {{-- <a href="{{ route('admin.gestarticles.articles.paiments') }}" class="nav-link"> --}}
+                @can('employe')
+                    <li class="nav-header">Caisse</li>
+                    {{-- <li class="nav-item">
+                    <a href="{{ route('employe.locations.paiement.liste') }}"class="nav-link">
                         <i class="nav-icon fas fa-sliders-h"></i>
-                        <p>Gestion Paiement</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    {{-- <a href="{{ route('admin.gestarticles.mails.create') }}" class="nav-link"> --}}
+                        <p>Les Paiements</p>
+                    </li> --}}
+                    {{-- <li class="nav-item">
+                    <a href="{{ route('admin.gestarticles.mails.create') }}" class="nav-link">
                         <i class="nav-icon fas fa-sliders-h"></i>
                         <p>Recouvrement mail</p>
-                    </a>
-                </li>
+                    </li> --}}
                 @endcan
             </ul>
         </nav>

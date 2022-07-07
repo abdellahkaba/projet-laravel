@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId("user_id")->constrained("users");
             $table->foreignId("location_id")->constrained("locations");
             $table->timestamps();
-            $table->unique(["user_id","location_id"]) ;
+            // $table->unique(["user_id","location_id"]) ;
         });
     }
 

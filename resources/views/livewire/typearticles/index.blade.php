@@ -4,9 +4,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header bg-primary">
-                    <h3 class="card-title"> <i class="fas fa-list fa-2x"></i> Liste des types d'article</h3>
+                    <h3 class="card-title"> <i class="fas fa-list fa-2x"></i> Liste de types d'articles</h3>
                     <div class="card-tools align-items-center d-flex">
-                        <a href="" class="btn btn-link text-white mr-4 d-block" style="background-color:blue" wire:click.prevent="showTypeArticleForm">
+                        <a href="" class="btn btn-link text-white mr-4 d-block" style="background-color:green" wire:click.prevent="showTypeArticleForm">
                             <i class="fas fa-user-plus"></i>
                             Nouveau type d'article
                         </a>

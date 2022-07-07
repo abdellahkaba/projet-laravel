@@ -9,7 +9,7 @@ class DureeLocation extends Model
 {
     use HasFactory;
 
-    public function tarification(){
-        return $this->hasMany(Tarification::class);
-    }
+    // public function tarification(){
+    //     return $this->hasMany(Tarification::class);
+    // }
 }

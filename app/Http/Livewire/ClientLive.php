@@ -41,9 +41,6 @@ class ClientLive extends Component
             'addClient.nom' => 'required',
             'addClient.prenom' => 'required',
             'addClient.sexe' => 'required',
-            'addClient.dateNaiss' => 'required',
-            'addClient.lieuNaiss' => 'required',
-            'addClient.ville' => 'required',
             'addClient.telephone' => 'required|numeric|unique:clients,telephone',
             'addClient.adresse' => 'required',
             //'addClient.email' => 'required|email|unique:Clients,email',
@@ -54,18 +51,15 @@ class ClientLive extends Component
         'addClient.nom.required' => 'Saisir le nom.',
         'addClient.prenom.required' => 'Saisir le prenom.',
         'addClient.sexe.required' => 'selectionner un sexe.',
-        'addClient.dateNaiss.required' => 'Donner la date de naissance.',
-        'addClient.lieuNaiss.required' => 'Donner le lieu de naissance.',
-        'addClient.ville.required' => 'Saisir la ville de provenance.',
         'addClient.telephone.required' => 'Donner un contact.',
-        'addClient.adresse.required' => 'Saisir l\'adresse.',
+        'addClient.adresse.required' => 'Saisir l\'adresse.'
     ];
 
     public function render(){
 
         Carbon::setLocale("fr"); //Traduction de la page en français
         $rechercherParNom = "%".$this->search."%";
-        $clients = Client::where("nom","like",$rechercherParNom)->latest()->paginate(5);
+        $clients = Client::where("nom","like",$rechercherParNom)->latest()->paginate(7);
         return view('livewire.clients.index' , ["clients" => $clients])
             ->extends('layouts.master')
             ->section('content');

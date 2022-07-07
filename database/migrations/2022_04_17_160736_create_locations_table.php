@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId("client_id")->constrained("clients");
             $table->foreignId("user_id")->constrained("users");
             $table->foreignId("statut_location_id")->constrained("statut_locations");
+            $table->double('prix');
             $table->timestamps();
             $table->unique(["statut_location_id","article_id"]) ;
         });

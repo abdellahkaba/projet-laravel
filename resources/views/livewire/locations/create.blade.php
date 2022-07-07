@@ -58,8 +58,6 @@
                             <th class="text-center text-uppercase text-bold text-indigo">Ajouté</th>
                             {{-- <th class="text-center text-uppercase text-bold text-indigo">Date fin</th> --}}
                             <th class="text-center text-uppercase text-bold text-indigo">Action</th>
-
-
                         </tr>
                     </thead>
                     <tbody>
@@ -80,20 +78,8 @@
                                         <span class="badge badge-success">Disponible</span>
                                     @endif
                                 </td>
-
                                 <td class="text-center text-sm">{{ optional($article->created_at)->diffForHumans() }}</td>
-                                {{-- <td class="text-center text-sm">Kaba</td> --}}
-                                
                                 <td class="text-lg-center">
-
-
-                                    {{-- @if(count($article->locations) > 0 )
-                                        <a title="Tarif {{ $article->nom }}" href="{{ route('admin.gestarticles.articles.tarifs',['articleId' => $article->id]) }}" class="btn btn-link bg-purple">Tarifs <i class="fas fa-money-check"></i>
-                                        </a>
-                                    @else
-                                        <a title="Tarif {{ $article->nom }}" href="{{ route('admin.gestarticles.articles.tarifs',['articleId' => $article->id]) }}" class="btn btn-link disabled bg-purple">Tarifs <i class="fas fa-money-check"></i>
-                                        </a>
-                                    @endif --}}
                                     <a title="Location {{ $article->nom }}" href="{{ route('employe.locations.articles.location',['articleId' => $article->id]) }}" class="btn btn-link bg-gradient-blue">Louer <i class="fas fa-money-check"></i>
                                     </a>
                                     {{-- @foreach ($locations as $location)
@@ -114,9 +100,9 @@
                         @empty
                             <tr>
                                 <td colspan="6">
-                                    <div class="alert alert-warning">
+                                    <div class="alert alert-info">
                                         <h3><i class="icon fas fa-ban"></i> Information !</h3>
-                                            Auncune donnée trouvée par rapport à cette Information
+                                            Auncune donnée trouvée !
                                     </div>
                                 </td>
                             </tr>

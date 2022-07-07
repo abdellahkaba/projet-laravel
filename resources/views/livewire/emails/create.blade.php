@@ -1,4 +1,4 @@
-<form role="form" action="{{ route('admin.gestarticles.emails.store') }}" method="POST"  enctype="multipart/form-data">
+{{-- <form role="form" action="{{ route('admin.gestarticles.emails.store') }}" method="POST"  enctype="multipart/form-data">
     <div class="card-body">
         <div class="row">
             <div class="col-6">
@@ -34,4 +34,19 @@
         <button type="submit" class="btn btn-primary">envoyé</button>
         {{-- <button type="submit" wire:click.prevent="gotoListUser()" class="btn btn-danger">Retour à la Liste</button> --}}
     </div>
-</form>
+{{-- </form> --}}
+
+{{-- <div class="row">
+    <div class="col-6">
+        <form action="" method="post">
+            <label for="">Nom</label>
+            <input type="text" name="nom" class="form-control-sm">
+            <label for="">Email</label>
+            <input type="email" name="email" class="form-control-sm">
+            <label for="">Message</label>
+            <input type="text" name="message">
+        </form>
+    </div>
+</div> --}}
+<x-header componentName = "Create"/>
+<h2>Bonjour Tout le monde !</h2>

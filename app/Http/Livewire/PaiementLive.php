@@ -25,10 +25,9 @@ class PaiementLive extends Component
     public function render()
     {
         return view('livewire.paiements.index', [
-            "paiements" => Paiement::with(["user"])->whereLocationId($this->location->id)->get(), "users" =>  User::all()
-        ])
-                ->extends("layouts.master")
-                ->section("content");
+            "paiements" => Paiement::whereLocationId($this->location->id)->get(),
+            "users" =>  User::all()
+        ])->extends("layouts.master")->section("content");
     }
 
     public function newPaiement(){
@@ -43,51 +42,18 @@ class PaiementLive extends Component
     public function savePaiement(){
 
         $locationId = $this->location->id;
-        $newPaiement = $this->newPaiement;
-
-        $uniqueRole = function() use($newPaiement,$locationId){
-
-            return (isset($newPaiement["edit"])) ?
-
-            Rule::unique((new Paiement())->getTable() , "user_id")
-                ->ignore($newPaiement["id"] , "id")
-                ->where(function($query) use ($locationId){
-                    return $query->where("location_id", $locationId);
-                })
-                :
-                Rule::unique((new Paiement())->getTable() , "user_id")
-                ->where(function($query) use ($locationId){
-                    return $query->where("location_id", $locationId);
-                });
-        };
-
-                //evite deux paiement par un meme utilisateur
-                $this->validate([
-                    "newPaiement.user_id" => [
-                        "required",
-                        $uniqueRole()
-                    ],
-                    "newPaiement.montant" => "required|numeric",
-                     "newPaiement.datePaiement" => "required",
-                ],
-                ["newPaiement.user_id.unique" => "Desolé ! \n Il existe déjà un Paiement par cet utilisateur !"]
-            );
-
-
-            Paiement::updateOrCreate(
-                //si tu trouve un location dejà loué tu le met à jour sinon tu le cree
+            $this->validate([
+                "newPaiement.montant" => "required|numeric",
+                "newPaiement.datePaiement" => "required",
+                "newPaiement.user_id" => "required",
+            ],);
+            Paiement::create(
                 [
                     "user_id" => $this->newPaiement["user_id"],
-                    "location_id" => $locationId
-                ],
-
-                [
+                    "location_id" => $locationId,
                     "montant" => $this->newPaiement["montant"],
                     "datePaiement" => $this->newPaiement["datePaiement"]
                 ],
-                // [
-                //     "datePaiement" =>$this->newPaiement["datePaiement"]
-                // ],
                 );
 
                 $this->cancelPaiement() ;
@@ -114,7 +80,7 @@ class PaiementLive extends Component
         }
 
         public function deletePaiement(Paiement $paiement){
-                
+
                 $paiement->delete() ;
         }
 

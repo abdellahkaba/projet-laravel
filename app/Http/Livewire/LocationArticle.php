@@ -37,16 +37,6 @@ class LocationArticle extends Component
 
 
     public function gotoListLocation(){
-        $this->currentPage = PAGECREATEFORM;
+        $this->currentPage = PAGELISTE;
     }
-
-    // public function searchEssaie($search){
-    //     foreach(Location::all() as $location){
-    //         if($location->dateFin < $search){
-    //             "<script>
-    //                 alert('Trouvé')
-    //             </script>";
-    //         }
-    //     }
-    // }
 }

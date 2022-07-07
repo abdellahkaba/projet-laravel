@@ -40,6 +40,7 @@ public function render()
         "clients" => Client::orderBy("nom","ASC")->get(),
         "users" => User::orderBy("nom","ASC")->get(),
 
+
     ];
 
     return view('livewire.locations.index',
@@ -66,13 +67,13 @@ public function editLocation(Location $Location){
 
 public function updateLocation(){
 
-    $articleId = $this->article->id ; 
+    $articleId = $this->article->id ;
     $editLocation = $this->editLocation ;
-    
+
         $uniqueRole = function() use($editLocation,$articleId){
-    
+
             return (isset($editLocation["edit"])) ?
-    
+
             Rule::unique((new Location())->getTable() , "statut_location_id")
                 ->ignore($editLocation["id"] , "id")
                 ->where(function($query) use ($articleId){
@@ -87,23 +88,26 @@ public function updateLocation(){
         //evite deux Locations pour une même journée
         $validationAttributes= $this->validate([
             "editLocation.statut_location_id" => ["required", $uniqueRole()],
-                "editLocation.dateDebut" => "required",
-                // "editLocation.dateFin" => "required",
+                // "editLocation.dateDebut" => "required",
+                //  "editLocation.dateFin" => "required",
                 // "editLocation.client" => "required",
-                "editLocation.user" => "required",
+                // "editLocation.user" => "required",
+                // "editLocation.prix" => "required",
             ],
-            ["editLocation.statut_location_id.unique" => "Desolé ! \n Il existe déjà un Location pour cette duree location !"]
+            ["editLocation.statut_location_id.unique" => "Desolé ! \n Il existe déjà un Location pour cette  location !"]
             );
-         
+
         Location::find($this->editLocation['id'])->update($validationAttributes["editLocation"]);
         $this->dispatchBrowserEvent("showSuccessMessage" , ["message" => "Location Terminé vous pouvez le supprimer Maintenant ! "]);
 
         $this->editLocation = [] ;
+
+
 }
 
 public function saveLocation(){
 
-    $articleId = $this->article->id ; 
+    $articleId = $this->article->id ;
     $newLocation = $this->newLocation ;
 
         $uniqueRole = function() use($newLocation,$articleId){
@@ -128,6 +132,7 @@ public function saveLocation(){
                 "newLocation.dateFin" => "required",
                 "newLocation.client" => "required",
                 "newLocation.user" => "required",
+                "newLocation.prix" => "required",
             ],
             ["newLocation.statut_location_id.unique" => "Desolé ! \n Il existe déjà un Location pour cette duree location !"]
             );
@@ -138,10 +143,14 @@ public function saveLocation(){
             "dateFin" => $this->newLocation["dateFin"],
             "client_id" => $this->newLocation["client"],
             "user_id" => $this->newLocation["user"],
+            "prix" => $this->newLocation["prix"],
         ],
     );
 
     $this->dispatchBrowserEvent("showSuccessMessage" , ["message" => "Location Enregistré avec succèss ! "]);
+
+    $this->addLocation = [] ;
+    $this->cancelLocation() ;
 }
 
 public function cancelLocation(){
@@ -172,6 +181,10 @@ public function confirmDelete($id){
     ]);
 }
 
+
+public function gotoListLocation(){
+    return back();
+}
 }
 
 

@@ -19,9 +19,9 @@ class Article extends Model
         return $this->belongsTo(TypeArticle::class , "type_article_id","id");
     }
 
-    public function tarifications(){
-          return $this->hasMany(Tarification::class);
-    }
+    // public function tarifications(){
+    //       return $this->hasMany(Tarification::class);
+    // }
 
     public function locations(){
           return $this->hasMany(Location::class);

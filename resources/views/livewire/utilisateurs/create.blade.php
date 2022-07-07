@@ -1,7 +1,7 @@
 <div class="row p-4 pt-5">
-    <div class="card card-primary">
+    <div class="card card-primary col-8">
         <div class="card-header">
-            <h3 class="card-title"> <i class="fas fa-user-plus fa-2x"></i> Formulaire d'ajout</h3>
+            <h3 class="card-title"> <i class="fas fa-user-plus fa-2x"></i> Formulaire d'ajout d'un Utilisateur</h3>
         </div>
         <form role="form" wire:submit.prevent="addUser()" enctype="multipart/form-data">
             <div class="card-body">
@@ -18,6 +18,17 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
+                            <label for=""><span class="text-indigo">Prenom</span></label>
+                            <input type="name" wire:model="newUser.prenom" class="form-control text-bold text-blue @error('newUser.prenom')
+                                is-invalid
+                            @enderror" >
+                            @error('newUser.prenom')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
                             <label for=""><span class="text-indigo">Nom</span></label>
                             <input type="name" wire:model="newUser.nom" class="form-control text-bold text-blue @error('newUser.nom')
                                is-invalid
@@ -27,13 +38,26 @@
                             @enderror
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for=""><span class="text-indigo">Prenom</span></label>
-                            <input type="name" wire:model="newUser.prenom" class="form-control text-bold text-blue @error('newUser.prenom')
+                            <label for=""><span class="text-indigo">Date de Naissance</span></label>
+                            <input type="date" wire:model="newUser.dateNaiss" class="form-control text-bold text-blue @error('newUser.dateNaiss')
+                               is-invalid
+                            @enderror">
+                            @error('newUser.dateNaiss')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for=""><span class="text-indigo">Lieu de Naissence</span></label>
+                            <input type="text" wire:model="newUser.lieuNaiss" class="form-control text-bold text-blue @error('newUser.lieuNaiss')
                                 is-invalid
                             @enderror" >
-                            @error('newUser.prenom')
+                            @error('newUser.lieuNaiss')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -86,24 +110,21 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                {{-- <div class="p-4">
+                    <div class="form-group">
+                        <input type="file" name="" wire:model="">
+                    </div>
+                    <div class="" style="border-block: 1px solid #eee ; border-radius : 30px ; height:72%; width: 72% ; overflow: hidden;">
+                        @if ($addPhoto)
+                            <img src="{{ $addPhoto->temporaryUrl() }}" style="height: 200px ; width: 250px;">
+                        @endif
+                    </div>
+                </div> --}}
                 <div class="form-group">
                     <label for=""><span class="text-indigo">password</span></label>
                     <input type="password" class="form-control" disabled placeholder="Mot de Pass">
                 </div>
-                {{-- <div class="form-group">
-                    <label for="path">File input</label>
-                    <div class="input-group">
-                        <div class="custom-file">
-                            <input type="file"  class="custom-file-input" id="path">
-                            <label class="custom-file-label" for="path">Sa photo</label>
-                        </div>
-                        <div class="input-group-append">
-                            <span class="input-group-text">Upload</span>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
-
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Ajouté</button>
                 <button type="submit" wire:click.prevent="gotoListUser()" class="btn btn-danger">Retour à la Liste</button>

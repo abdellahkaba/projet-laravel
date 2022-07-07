@@ -27,6 +27,8 @@ class Utilisateurs extends Component
     public $newUser = [] ;
 
     public $editUser = [] ;
+    public $editPhoto = null;
+    public $addPhoto = null ;
 
     public $currentPage = PAGELISTE ;
 
@@ -35,34 +37,41 @@ class Utilisateurs extends Component
     public function rules(){
         if($this->currentPage == PAGEEDITFORM){
             return [
-                'editUser.nom' => 'required',
                 'editUser.prenom' => 'required',
+                'editUser.nom' => 'required',
+                'editUser.dateNaiss' => 'required',
+                'editUser.lieuNaiss' => 'required',
                 'editUser.sexe' => 'required',
                 'editUser.telephone' => ['required','numeric',Rule::unique("users","telephone")->ignore($this->editUser['id'])],
                 'editUser.adresse' => 'required',
                 'editUser.email' => ['required','email',Rule::unique("users","email")->ignore($this->editUser['id'])],
             ];
         }
-
         return [
-            'newUser.nom' => 'required',
             'newUser.prenom' => 'required',
+            'newUser.nom' => 'required',
+            'newUser.dateNaiss' => 'required',
+            'newUser.lieuNaiss' => 'required',
             'newUser.sexe' => 'required',
             'newUser.telephone' => 'required|numeric|unique:users,telephone',
             'newUser.adresse' => 'required',
             'newUser.email' => 'required|email|unique:users,email',
+            //  "addPhoto" => 'image|max:10240',
             'newUser.path' => '',
             // 'newUser.password' => 'required|password|unique:users,password',
         ];
     }
 
     protected $messages = [
-        'newUser.nom.required' => 'Saisir le nom.',
         'newUser.prenom.required' => 'Saisir le prenom.',
+        'newUser.nom.required' => 'Saisir le nom.',
+        'newUser.dateNaiss.required' => 'Saisir le prenom.',
+        'newUser.lieuNaiss.required' => 'Saisir le prenom.',
         'newUser.sexe.required' => 'selectionner un sexe.',
         'newUser.telephone.required' => 'Donner un contact.',
         'newUser.email.required' => 'Saisir l\'adresse email.',
         'newUser.adresse.required' => 'Saisir l\'adresse.',
+        
         // 'newUser.password.required' => 'Saisir le mot de pass.',
     ];
 
@@ -146,12 +155,20 @@ class Utilisateurs extends Component
     }
 
     public function addUser(){
-
-
        $validationAttributes = $this->validate();
        $validationAttributes["newUser"]["password"] = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
        $validationAttributes["newUser"]["email_verified_at"] = now() ;
-        User::create($validationAttributes["newUser"]);
+    //    $imagePath = "images/imageplaceholder.png" ;
+    //     if($this->addPhoto != null){
+    //       $path = $this->addPhoto->store('upload', 'public');
+    //       $imagePath = "storage/".$path ;
+    //       $image = Image::make(public_path($imagePath))->fit(204,204) ;
+    //       $image->save() ;
+    //     }
+    //     $validationAttributes['newUser']["photo"] = $imagePath ;
+        User::create(
+            $validationAttributes["newUser"]
+        );
         $this->newUser = [];
      $this->dispatchBrowserEvent("showSuccessMessage",["message" =>
      "Utilisateur Ajouté avec succèss ! "]);

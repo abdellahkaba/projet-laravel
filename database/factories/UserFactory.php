@@ -18,8 +18,10 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'nom' => $this->faker->lastName(),
             'prenom' => $this->faker->firstName(),
+            'nom' => $this->faker->lastName(),
+            "dateNaiss" => $this->faker->dateTimeBetween("1980-01-01","2002-11-11"),
+            "lieuNaiss" => $this->faker->city,
             'sexe' => array_rand(["H","F"] , 1),
             'telephone' =>$this->faker->unique()->phoneNumber(),
             'adresse' => $this->faker->address(),

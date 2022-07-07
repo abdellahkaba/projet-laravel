@@ -18,9 +18,6 @@ return new class extends Migration
             $table->string('nom');
             $table->string('prenom');
             $table->char('sexe');
-            $table->date('dateNaiss');
-            $table->string('lieuNaiss');
-            $table->string('ville');
             $table->string('adresse');
             $table->string('telephone');
             $table->timestamps();

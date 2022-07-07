@@ -9,7 +9,7 @@
                         Retour à la liste
                     </a>
 
-                            <a href="" class="btn btn-link text-white mr-4 d-block" aria-disabled="true" style="background-color: #006 ; border-color: #0062cc " wire:click.prevent="newPaiement">
+                            <a href="" class="btn btn-link text-white mr-4 d-block" aria-disabled="true" style="background-color: green ; border-color: #0062cc " wire:click.prevent="newPaiement">
                         <i class="fas fa-user-plus"></i>
                         Nouvel Paiement
                             </a>
@@ -43,14 +43,14 @@
 
                             </div>
                             <div class="form-group">
-                                <label for=""><span class="text-indigo">Veuillez choisir votre nom</span></label>
+                                <label for=""><span class="text-indigo">Veuillez choisir <i>{{ auth()->user()->prenom }} {{ auth()->user()->nom }}</i></span></label>
                                 <select
                                     wire:model="newPaiement.user_id"
-                                    class="form-control text-uppercase text-bold
+                                    class="form-control
                                         @error('newPaiement.user_id')
                                             is-invalid
                                         @enderror">
-                                    <option value="selected"></option>
+                                    <option value="selected">----------</option>
                                     @foreach ($users as $user)
                                         <option class="text-indigo" value="{{ $user->id }}">{{ $user->prenom }} {{ $user->nom }}</option>
                                     @endforeach
@@ -59,22 +59,6 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            {{-- <div class="form-group">
-                                <select
-                                    wire:model="newPaiement.location_id"
-                                    class="form-control
-                                        @error('newPaiement.location_id')
-                                            is-invalid
-                                        @enderror">
-                                    <option value="selected">Choisir location</option>
-                                    @foreach ($locations as $location)
-                                        <option value="{{ $location->id }}">{{ $location->statuts->nom }}</option>
-                                    @endforeach
-                                </select>
-                                @error('newPaiement.location_id')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div> --}}
                         </div>
                         <div>
                             <button class="btn btn-link bg-success text-uppercase text-bold" wire:click.prevent="savePaiement"><i class="fa fa-check"></i>Valider
@@ -88,31 +72,31 @@
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
                         <tr>
-                            <th class="text-center text-uppercase text-bold text-indigo">N°</th>
-                            <th class="text-center text-uppercase text-bold text-indigo">Date de Paiement</th>
-                            <th class="text-center text-uppercase text-bold text-indigo">Montant</th>
-                            <th class="text-center text-uppercase text-bold text-indigo">Effectué par</th>
-                            <th class="text-center text-uppercase text-bold text-indigo">Action</th>
+                            <th class="text-center  text-bold text-indigo">N°</th>
+                            <th class="text-center  text-bold text-indigo">Date de Paiement</th>
+                            <th class="text-center  text-bold text-indigo">Montant</th>
+                            <th class="text-center  text-bold text-indigo">Effectué par</th>
+                            <th class="text-center  text-bold text-indigo">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($paiements as $paiement)
                             <tr>
-                                <td class="text-center text-center text-uppercase text-bold text-indigo">{{ ++$loop->index }}</td>
-                                <td class="text-center text-center text-uppercase text-bold text-indigo">{{ $paiement->datePaiement }}</td>
-                                <td class="text-center text-center text-uppercase text-bold text-indigo">{{ $paiement->montantForHumans}}</td>
-                                <td class="text-center text-center text-uppercase text-bold text-indigo">{{ $paiement->user->nom}} {{ $paiement->user->prenom }}</td>
-                                <td class="text-center text-center text-uppercase text-bold text-indigo">
+                                <td class="text-center  ">{{ ++$loop->index }}</td>
+                                <td class="text-center ">{{ $paiement->datePaiement }}</td>
+                                <td class="text-center ">{{ $paiement->montantForHumans}}</td>
+                                <td class="text-center   "> {{ $paiement->user->prenom }} {{ $paiement->user->nom}} </td>
+                                <td class="text-center    ">
 
-                                    <button class="btn btn-success text-uppercase text-bold" wire:click="editPaiement({{ $paiement->id }})"><i class="far fa-edit"></i> Modifier
-                                    </button>
+                                    {{-- <button class="btn btn-success  " wire:click="editPaiement({{ $paiement->id }})"><i class="far fa-edit"></i> Edit
+                                    </button> --}}
 
-                                    <button class="btn btn-danger text-uppercase text-bold" wire:click="confirmDelete('{{ $paiement->id }}')"><i class="far fa-trash-alt"></i> Supprimer</button>
+                                    <button class="btn btn-danger  " wire:click="confirmDelete('{{ $paiement->id }}')"><i class="far fa-trash-alt"></i> Delete  </button>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4">
+                                <td colspan="6">
                                     <div class="alert alert-info">
                                         <h3><i class="icon fas fa-ban"></i> Information !</h3>
                                             Aucun paiement sur cet Article d'abord !
